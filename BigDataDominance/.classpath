@@ -2,5 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="Jars/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="Jars/dom4j-1.6.jar"/>
+	<classpathentry kind="lib" path="Jars/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="Jars/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="Jars/jackson-annotations-2.8.1.jar"/>
+	<classpathentry kind="lib" path="Jars/jackson-core-2.8.1.jar"/>
+	<classpathentry kind="lib" path="Jars/jackson-databind-2.8.1.jar"/>
+	<classpathentry kind="lib" path="Jars/json-20160212.jar"/>
+	<classpathentry kind="lib" path="Jars/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

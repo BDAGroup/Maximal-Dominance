@@ -7,17 +7,10 @@ package searchQuery;
  * @author Verch_HP
  *
  */
-
-
-
-
 public class QueryClass {
-
 	/**
 	 * 
 	 */
-	
-	
 	private String usernamame;
 	private double latitude;
 	private double longitude;
