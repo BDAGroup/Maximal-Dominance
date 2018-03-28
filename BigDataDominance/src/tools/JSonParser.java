@@ -3,20 +3,18 @@ package tools;
  
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
+import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 
 public class JSonParser {
 	
 	public static String KEy = "AIzaSyCrC87vfVbf9r5LDWSCVAMc54TazyMQP9g";
-	//41.1536674,-81.3578859
 
 	public static void main(String[] args) {
 	
@@ -28,7 +26,7 @@ public class JSonParser {
 	public static void NearByRestaurants(double lat , double longtitude , String cuisine , String key )
 	{
 		
-		JSONParser parser = new JSONParser();
+		  JSONObject jsonObj = null;
 
         try {     
         	
@@ -41,27 +39,33 @@ public class JSonParser {
             URL oracle = new URL(url);
             
             URLConnection yc = oracle.openConnection();
+            
+            
             BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
             
             String inputLine;
-            while ((inputLine = in.readLine()) != null) {  
-            	
-                System.out.println("JSON" +   inputLine);
-                //JSONArray a = (JSONArray) parser.parse(inputLine);
-               
-               // System.out.println("Post ID : " +    a.toJSONString());
-                
-        
-            }
+            
+            StringBuilder stringBuilder = new StringBuilder();
+            
+            
+            while ((inputLine = in.readLine()) != null) { 
+            	   stringBuilder.append(inputLine);
+ 
+           }
+     
             in.close();
+            
+            String ret = stringBuilder.toString();
+            jsonObj = new JSONObject(ret);
+        
+            
+            System.out.println("JSON" +   ret);
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } /*catch (ParseException e) {
-            e.printStackTrace();
-        }   
-		*/
+        }  
 	}
  
 	
@@ -87,11 +91,6 @@ public class JSonParser {
             while ((inputLine = in.readLine()) != null) {  
             	
                 System.out.println("JSON" +   inputLine);
-                //JSONArray a = (JSONArray) parser.parse(inputLine);
-               
-               // System.out.println("Post ID : " +    a.toJSONString());
-                
-        
             }
             in.close();
         } catch (FileNotFoundException e) {
@@ -103,6 +102,9 @@ public class JSonParser {
         }   
 		*/
 	}
+	
+	
+	
 	
 
 }
