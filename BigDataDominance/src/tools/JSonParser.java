@@ -36,20 +36,23 @@ public class JSonParser {
         			+"keyword="+cuisine+""
         					+ "&key="+key+"";
         	
+        	System.out.println(url);
+        	
+        	
             URL oracle = new URL(url);
             
             URLConnection yc = oracle.openConnection();
-            
             
             BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
             
             String inputLine;
             
             StringBuilder stringBuilder = new StringBuilder();
-            
-            
+
             while ((inputLine = in.readLine()) != null) { 
             	   stringBuilder.append(inputLine);
+            	   
+            	   System.out.println("data" + String.valueOf(inputLine));
  
            }
      
@@ -57,9 +60,7 @@ public class JSonParser {
             
             String ret = stringBuilder.toString();
             jsonObj = new JSONObject(ret);
-        
-            
-            System.out.println("JSON" +   ret);
+
             
         } catch (FileNotFoundException e) {
             e.printStackTrace();
