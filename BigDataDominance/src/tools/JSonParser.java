@@ -36,7 +36,8 @@ public class JSonParser {
         			+"keyword="+cuisine+""
         					+ "&key="+key+"";
         	
-        	System.out.println(url);
+        	System.out.println("Hello all! This is just for testing.");
+            System.out.println(url);
         	
         	
             URL oracle = new URL(url);
