@@ -1,3 +1,6 @@
 https://jxbrowser.support.teamdev.com/support/solutions/articles/9000012874-google-maps
-This like shows how to display your Google map with a marker (pins): 
-https://developers.google.com/maps/documentation/javascript/adding-a-google-map
+The following links shows how to display your Google map with a marker (pins): 
+https://developers.google.com/maps/documentation/javascript/adding-a-google-map (The most importatnt one)
+https://developers.google.com/maps/documentation/javascript/custom-markers (if you want to change the marker icon on Google map)
+https://stackoverflow.com/questions/7701077/add-marker-function-with-google-maps-api
+https://www.tutorialspoint.com/google_maps/google_maps_markers.htm
