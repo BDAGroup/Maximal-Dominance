@@ -186,9 +186,8 @@ public class MainGUI extends JFrame implements ActionListener{
         //frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 		frame.setResizable(true);
-		/*frame.repaint();
-		 
-		frame.validate();*/
+		frame.repaint();
+		frame.validate();
 	
 
 		

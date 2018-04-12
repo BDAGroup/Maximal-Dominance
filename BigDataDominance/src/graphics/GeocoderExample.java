@@ -69,7 +69,7 @@ public class GeocoderExample extends MapView {
     public void addNotify() {
         super.addNotify();
 
-        optionsWindow = new OptionsWindow(this, new Dimension(250, 40)) {
+        optionsWindow = new OptionsWindow(this, new Dimension(300, 400)) {
             @Override
             public void initContent(JWindow contentWindow) {
                 JPanel content = new JPanel(new GridBagLayout());
@@ -107,10 +107,8 @@ public class GeocoderExample extends MapView {
                 searchButton.addActionListener(searchActionListener);
                 searchField.addActionListener(searchActionListener);
 
-                content.add(searchField, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
-                        GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(11, 11, 11, 0), 0, 0));
-                content.add(searchButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(11, 0, 11, 11), 0, 0));
+               content.add(searchField, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(11, 11, 11, 0), 0, 0));
+                content.add(searchButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(11, 0, 11, 11), 0, 0));
 
                 contentWindow.getContentPane().add(content);
             }

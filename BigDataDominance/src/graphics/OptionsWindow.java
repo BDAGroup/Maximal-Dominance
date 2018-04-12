@@ -62,9 +62,12 @@ abstract class OptionsWindow {
 
     abstract public void initContent(JWindow contentWindow);
 
-    protected void updatePosition() {
+    protected void updatePosition() 
+    {
         Rectangle bounds = new Rectangle();
-        bounds.setLocation((int) (parentFrame.getX() + (parentFrame.getWidth() - size.getWidth()) / 2), (int) (parentFrame.getY() + parentFrame.getHeight() - size.getHeight() - 20));
+        
+        bounds.setLocation((int) (parentFrame.getX() + (parentFrame.getWidth() - size.getWidth()) / 2), (int) (parentFrame.getY() + parentFrame.getHeight() - size.getHeight() -100));
+        
         bounds.setSize(size);
 
         contentWindow.setBounds(bounds);
