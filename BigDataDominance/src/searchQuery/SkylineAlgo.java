@@ -18,7 +18,7 @@ public class SkylineAlgo {
 	public static void main(String[] args)
 	{
 		
-		
+		//asodkas
 		
 		
 		int[][] skyscraper = {
