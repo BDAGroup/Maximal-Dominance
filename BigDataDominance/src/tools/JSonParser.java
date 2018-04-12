@@ -15,7 +15,6 @@ import org.json.simple.parser.JSONParser;
 public class JSonParser {
 	
 	public static String KEy = "AIzaSyCrC87vfVbf9r5LDWSCVAMc54TazyMQP9g";
-
 	public static void main(String[] args) {
 	
 		NearByRestaurants(41.1536674 , -81.3578859 , "Mexican" , KEy);

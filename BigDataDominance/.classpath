@@ -11,5 +11,11 @@
 	<classpathentry kind="lib" path="Jars/jackson-databind-2.8.1.jar"/>
 	<classpathentry kind="lib" path="Jars/json-20160212.jar"/>
 	<classpathentry kind="lib" path="Jars/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Jars/JTattoo-1.6.11.jar"/>
+	<classpathentry kind="lib" path="Jars/jxbrowser-6.19.1.jar"/>
+	<classpathentry kind="lib" path="Jars/jxbrowser-win32-6.19.1.jar"/>
+	<classpathentry kind="lib" path="Jars/jxmaps-1.3.1.jar"/>
+	<classpathentry kind="lib" path="Jars/jxmaps-win-1.3.1.jar"/>
+	<classpathentry kind="lib" path="Jars/license.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
