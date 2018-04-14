@@ -75,12 +75,12 @@ public class GeocoderExample extends MapView {
                 JPanel content = new JPanel(new GridBagLayout());
                 content.setBackground(Color.white);
 
-                Font robotoPlain13 = new Font("Roboto", 0, 13);
+                Font robotoPlain18 = new Font("Roboto", 0, 18);
                 final JTextField searchField = new JTextField();
                 searchField.setText(INITIAL_LOCATION);
                 searchField.setToolTipText("Enter address or coordinates...");
                 searchField.setBorder(BorderFactory.createEmptyBorder());
-                searchField.setFont(robotoPlain13);
+                searchField.setFont(robotoPlain18);
                 searchField.setForeground(new Color(0x21, 0x21, 0x21));
                 searchField.setUI(new SearchFieldUI(searchField));
 
@@ -117,7 +117,7 @@ public class GeocoderExample extends MapView {
             protected void updatePosition() {
                 if (parentFrame.isVisible()) {
                     Point newLocation = parentFrame.getContentPane().getLocationOnScreen();
-                    newLocation.translate(80, 100);
+                    newLocation.translate(455, 115);
                     contentWindow.setLocation(newLocation);
                     contentWindow.setSize(320, 40);
                 }
