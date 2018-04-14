@@ -104,7 +104,7 @@ public class Frm_Main extends javax.swing.JFrame {
         });
 
         cbo_cuisine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ..." }));
+        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ...", "American", "Italian", "Mexican", "Chinese", "Indian", "Nepalese" }));
 
         btn_search.setBackground(new java.awt.Color(0, 102, 204));
         btn_search.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N

@@ -21,9 +21,9 @@ public class MainGUI extends JFrame implements ActionListener{
 	
 
     
-	public static void main(final String[] args) {
-		new MainGUI().MapView( ); 
-	}
+//	public static void main(final String[] args) {
+//		new MainGUI().MapView( ); 
+//	}
   
 
 	private   void placeComponents1(JPanel panel) {
