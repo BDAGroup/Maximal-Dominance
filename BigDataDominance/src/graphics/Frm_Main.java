@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package samplebigdata;
+package graphics;
 
 import graphics.GeocoderExample;
+import tools.JSonParser;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Point;
+import java.io.IOException;
+import java.util.Vector;
+
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -20,6 +26,31 @@ public class Frm_Main extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Main
      */
+ 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_search;
+    private javax.swing.JComboBox<String> cbo_cuisine;
+    private javax.swing.JComboBox<String> cbo_sortby;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lbl_cuisine;
+    private javax.swing.JLabel lbl_cuisine1;
+    private javax.swing.JLabel lbl_header;
+    private javax.swing.JLabel lbl_result;
+    private javax.swing.JLabel lbl_search;
+    private javax.swing.JLabel lbl_sortby;
+    private javax.swing.JList<String> lst_restaurants;
+    public javax.swing.JPanel pnl_header;
+    private static javax.swing.JPanel pnl_map;
+    private javax.swing.JPanel pnl_results;
+    private javax.swing.JPanel pnl_search;
+    private javax.swing.JTextField txt_searchrange;
+    // End of variables declaration//GEN-END:variables
+    
+    
+    public static Vector<String> restuarantName =  new Vector<String>();
+	
     public Frm_Main() {
         initComponents();
     }
@@ -163,10 +194,33 @@ public class Frm_Main extends javax.swing.JFrame {
         lbl_result.setText("Results");
 
         lst_restaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lst_restaurants.setModel(new javax.swing.AbstractListModel<String>() {
+        
+        Vector<String> vec  = restuarantName;
+        
+        System.out.println(vec.size());
+        
+        lst_restaurants.setModel(new javax.swing.AbstractListModel<String>() 
+        {
             String[] strings = { "1. Restaurant 1", "2. Restaurant 2", "3. Restaurant 3", "4. Restaurant 4", "5. Restaurant 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            
+            public int getSize() { 
+            	
+            	if (vec.size() == 0)
+            	
+            	return strings.length; 
+            	
+            	else 
+            		return vec.size();
+            }
+            
+            public String getElementAt(int i)
+            { 
+            	if (vec.size() == 0)
+            	return strings[i]; 
+            	
+            	else return vec.get(i).toString();
+            	
+            }
         });
         jScrollPane1.setViewportView(lst_restaurants);
 
@@ -289,36 +343,38 @@ public class Frm_Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Frm_Main mainFrame = new Frm_Main();
+               
                 GeocoderExample mapView = new GeocoderExample();
-                mainFrame.pnl_map.removeAll();
-                mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
-                mainFrame.pnl_map.validate();
-                mainFrame.pnl_map.setVisible(true);
-                //mainFrame.add(pnl_map);
-                mainFrame.setVisible(true);
+       
+                
+                try {
+					String str = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , "Mexican" , JSonParser.KEy , 4);
+					JSonParser.getData(str);		
+					
+					restuarantName  = JSonParser.getResVec();
+			         Frm_Main mainFrame = new Frm_Main();
+		             mainFrame.pnl_map.removeAll();
+					Vector<String > strPid  = JSonParser.getResPID();
+		                
+		                for (int i = 0 ; i < restuarantName.size() ; i++ )
+		                {
+		                	System.out.println(restuarantName.get(i).toString());
+		                    mapView.performGeocode( restuarantName.get(i).toString() );
+		                }
+		            
+		                
+		                mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
+		                mainFrame.pnl_map.validate();
+		                mainFrame.pnl_map.setVisible(true);
+		                //mainFrame.add(pnl_map);
+		                mainFrame.setVisible(true);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+             
             }
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_search;
-    private javax.swing.JComboBox<String> cbo_cuisine;
-    private javax.swing.JComboBox<String> cbo_sortby;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lbl_cuisine;
-    private javax.swing.JLabel lbl_cuisine1;
-    private javax.swing.JLabel lbl_header;
-    private javax.swing.JLabel lbl_result;
-    private javax.swing.JLabel lbl_search;
-    private javax.swing.JLabel lbl_sortby;
-    private javax.swing.JList<String> lst_restaurants;
-    public javax.swing.JPanel pnl_header;
-    private static javax.swing.JPanel pnl_map;
-    private javax.swing.JPanel pnl_results;
-    private javax.swing.JPanel pnl_search;
-    private javax.swing.JTextField txt_searchrange;
-    // End of variables declaration//GEN-END:variables
 }

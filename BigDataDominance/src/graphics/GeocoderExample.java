@@ -7,6 +7,7 @@ import com.teamdev.jxmaps.GeocoderResult;
 import com.teamdev.jxmaps.GeocoderStatus;
 import com.teamdev.jxmaps.InfoWindow;
 import com.teamdev.jxmaps.LatLng;
+import com.teamdev.jxmaps.LatLngBounds;
 import com.teamdev.jxmaps.Map;
 import com.teamdev.jxmaps.MapOptions;
 import com.teamdev.jxmaps.MapReadyHandler;
@@ -48,7 +49,7 @@ public class GeocoderExample extends MapView {
                 // Getting the associated map object
                 final Map map = getMap();
                 // Setting initial zoom value
-                map.setZoom(7.0);
+                map.setZoom(10.0);
                 // Creating a map options object
                 MapOptions options = new MapOptions(map);
                 // Creating a map type control options object
@@ -160,14 +161,17 @@ public class GeocoderExample extends MapView {
         optionsWindow.dispose();
     }
 
-    private void performGeocode(String text) {
+    public void performGeocode(String text) {
         // Getting the associated map object
+    	
+    	try{
         final Map map = getMap();
         // Creating a geocode request
         GeocoderRequest request = new GeocoderRequest(map);
         // Setting address to the geocode request
+ 
         request.setAddress(text);
-
+   
         // Geocoding position by the entered address
         getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
             @Override
@@ -177,6 +181,12 @@ public class GeocoderExample extends MapView {
                     // Getting the first result
                     GeocoderResult result = results[0];
                     // Getting a location of the result
+                    
+                   /*String name =  result.getJSObject().f_();
+                   
+                   System.out.println(name);
+                   */
+                   
                     LatLng location = result.getGeometry().getLocation();
                     // Setting the map center to result location
                     map.setCenter(location);
@@ -187,7 +197,7 @@ public class GeocoderExample extends MapView {
                     // Creating an information window
                     InfoWindow infoWindow = new InfoWindow(map);
                     // Putting the address and location to the content of the information window
-                    infoWindow.setContent("<b>" + result.getFormattedAddress() + "</b><br>" + location.toString());
+                    infoWindow.setContent("<b>" + text+ "</b><br>" + location.toString());
                     // Moving the information window to the result location
                     infoWindow.setPosition(location);
                     // Showing of the information window
@@ -195,6 +205,66 @@ public class GeocoderExample extends MapView {
                 }
             }
         });
+    }
+    	  catch(Exception e )
+        {
+        	
+        }
+    }
+    
+    public void performGeocode(String Name ,String lat , String lon ) {
+        // Getting the associated map object
+    	
+    	try{
+        final Map map = getMap();
+        // Creating a geocode request
+        GeocoderRequest request = new GeocoderRequest(map);
+        // Setting address to the geocode request
+ 
+        LatLngBounds lg ;
+         
+        
+        //request.setLocation(lat);
+        request.setAddress(Name);
+   
+        // Geocoding position by the entered address
+        getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
+            @Override
+            public void onComplete(GeocoderResult[] results, GeocoderStatus status) {
+                // Checking operation status
+                if ((status == GeocoderStatus.OK) && (results.length > 0)) {
+                    // Getting the first result
+                    GeocoderResult result = results[0];
+                    // Getting a location of the result
+                    
+                   /*String name =  result.getJSObject().f_();
+                   
+                   System.out.println(name);
+                   */
+                   
+                    LatLng location = result.getGeometry().getLocation();
+                    // Setting the map center to result location
+                    map.setCenter(location);
+                    // Creating a marker object
+                    Marker marker = new Marker(map);
+                    // Setting position of the marker to the result location
+                    marker.setPosition(location);
+                    // Creating an information window
+                    InfoWindow infoWindow = new InfoWindow(map);
+                    // Putting the address and location to the content of the information window
+                    infoWindow.setContent("<b>" + Name+ "</b><br>" + location.toString());
+                    // Moving the information window to the result location
+                    infoWindow.setPosition(location);
+                    // Showing of the information window
+                    infoWindow.open(map, marker);
+                }
+            }
+        });
+    }
+    	  catch(Exception e )
+        {
+        	
+        }
     }
  
 }
