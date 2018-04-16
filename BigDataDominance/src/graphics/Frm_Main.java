@@ -121,7 +121,7 @@ public class Frm_Main extends javax.swing.JFrame {
         lbl_header.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         lbl_header.setForeground(new java.awt.Color(0, 102, 204));
         lbl_header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_header.setText("              Top Dominating Restaurants Finder");
+        lbl_header.setText("Top Dominating Restaurants Finder");
 
         javax.swing.GroupLayout pnl_headerLayout = new  GroupLayout(pnl_header);
         pnl_header.setLayout(pnl_headerLayout);
@@ -233,13 +233,19 @@ public class Frm_Main extends javax.swing.JFrame {
 						// TODO Auto-generated method stub+
 						
 						 mapView.removeAll();
-						 mapView = new GeocoderExample();
-						//mapView.repaint();
+						 mapView = new GeocoderExample();			
 						 lst_restaurants.removeAll();
 						 SearchAction();
 						
 				         mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
 				         mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
+				         mainFrame.repaint();
+				         mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
+			             mainFrame.pnl_map.validate();
+			             mainFrame.pnl_map.setVisible(true);
+			             mainFrame.add(mainFrame.pnl_map);
+			             mainFrame.setVisible(true);
+			             mainFrame.repaint();
 				  		 
 					}
         	
@@ -401,7 +407,7 @@ public class Frm_Main extends javax.swing.JFrame {
 					
 					restuarantName  = JSonParser.getResVec();
 			        mainFrame = new Frm_Main();
-		            mainFrame.pnl_map.removeAll();
+		            //mainFrame.pnl_map.removeAll();
  
 		            Vector<String > strPid  = JSonParser.getResPID();
 		            mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
@@ -415,6 +421,7 @@ public class Frm_Main extends javax.swing.JFrame {
 		                mainFrame.pnl_map.setVisible(true);
 		                mainFrame.add(mainFrame.pnl_map);
 		                mainFrame.setVisible(true);
+		               
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
