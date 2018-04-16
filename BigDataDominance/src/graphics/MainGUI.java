@@ -136,12 +136,14 @@ public class MainGUI extends JFrame implements ActionListener{
 	
 
  
-	
+
 	public   void MapView()
 	{
 
 		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel"); 	
+		//	pat.setUpColor();	
+		//	pat.setName("Search Engine");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

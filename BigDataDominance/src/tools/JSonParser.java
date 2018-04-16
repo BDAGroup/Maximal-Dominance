@@ -13,11 +13,7 @@ import java.util.Vector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import com.teamdev.jxmaps.Map;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,6 +21,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 
+@SuppressWarnings("deprecation")
 public class JSonParser {
 	
 	public static String KEy = "AIzaSyCrC87vfVbf9r5LDWSCVAMc54TazyMQP9g";
@@ -150,15 +147,9 @@ public class JSonParser {
 	                data.add(price_level);
 	                data.add(rating);
 	                resVec.addElement(name);
-	                
 	                resPID.addElement(place_id);
-	                
 	                retreiveData.put(i, data);
-	 
-	         /*       System.out.println( "Name = "+name + " | Lat = "+location.get("lat") + " | Lng = "+location.get("lng"));
-	                System.out.println( "Open = "+open); 
-	                System.out.println( "Price Level = "+price_level); 
-	                System.out.println( "Score = "+rating); */
+ 
 	        	   }
 
 	        	   catch(Exception e)
@@ -179,7 +170,7 @@ public class JSonParser {
 	}
 	
 	
-	public static String RestaurantsWithInRadius (double lat , double longtitude , String cuisine , String key , long radius) throws ParseException, FileNotFoundException, IOException 
+	public static String RestaurantsWithInRadius (double lat , double longtitude , String cuisine , String key , double radius) throws ParseException, FileNotFoundException, IOException 
 	{
 		   InputStream inputStream = null;
            String json = "";

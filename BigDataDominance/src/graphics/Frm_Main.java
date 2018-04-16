@@ -9,11 +9,26 @@ import graphics.GeocoderExample;
 import tools.JSonParser;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowStateListener;
 import java.io.IOException;
 import java.util.Vector;
+
+import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.json.simple.parser.ParseException;
 
@@ -24,29 +39,38 @@ import org.json.simple.parser.ParseException;
 public class Frm_Main extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form Frm_Main
      */
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_search;
-    private javax.swing.JComboBox<String> cbo_cuisine;
-    private javax.swing.JComboBox<String> cbo_sortby;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lbl_cuisine;
-    private javax.swing.JLabel lbl_cuisine1;
-    private javax.swing.JLabel lbl_header;
-    private javax.swing.JLabel lbl_result;
-    private javax.swing.JLabel lbl_search;
-    private javax.swing.JLabel lbl_sortby;
-    private javax.swing.JList<String> lst_restaurants;
-    public javax.swing.JPanel pnl_header;
-    private static javax.swing.JPanel pnl_map;
-    private javax.swing.JPanel pnl_results;
-    private javax.swing.JPanel pnl_search;
-    private javax.swing.JTextField txt_searchrange;
+    private   JButton btn_search;
+    private  JComboBox<String> cbo_cuisine;
+    private  JComboBox<String> cbo_sortby;
+    private  JScrollPane jScrollPane1;
+    private  JSeparator jSeparator1;
+    private  JSeparator jSeparator2;
+    private JLabel lbl_cuisine;
+    private JLabel lbl_cuisine1;
+    private  JLabel lbl_header;
+    private   JLabel lbl_result;
+    private  JLabel lbl_search;
+    private  JLabel lbl_sortby;
+    private  JList<String> lst_restaurants;
+    public  JPanel pnl_header;
+    private  JPanel pnl_map;
+    private  JPanel pnl_results;
+    private  JPanel pnl_search;
+    private JTextField txt_searchrange;
     // End of variables declaration//GEN-END:variables
+    
+    private String SelectedCuisine;
+    private Double RadiusMile;
+    private static GeocoderExample mapView = new GeocoderExample();
+ 
     
     
     public static Vector<String> restuarantName =  new Vector<String>();
@@ -64,45 +88,45 @@ public class Frm_Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_header = new javax.swing.JPanel();
-        lbl_header = new javax.swing.JLabel();
-        pnl_search = new javax.swing.JPanel();
-        lbl_search = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        lbl_cuisine = new javax.swing.JLabel();
-        lbl_cuisine1 = new javax.swing.JLabel();
-        txt_searchrange = new javax.swing.JTextField();
-        cbo_cuisine = new javax.swing.JComboBox<>();
-        btn_search = new javax.swing.JButton();
-        pnl_results = new javax.swing.JPanel();
-        lbl_result = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lst_restaurants = new javax.swing.JList<>();
-        lbl_sortby = new javax.swing.JLabel();
-        cbo_sortby = new javax.swing.JComboBox<>();
-        pnl_map = new javax.swing.JPanel();
+        pnl_header = new  JPanel();
+        lbl_header = new  JLabel();
+        pnl_search = new  JPanel();
+        lbl_search = new  JLabel();
+        jSeparator1 = new  JSeparator();
+        lbl_cuisine = new  JLabel();
+        lbl_cuisine1 = new  JLabel();
+        txt_searchrange = new  JTextField();
+        cbo_cuisine = new  JComboBox<>();
+        btn_search = new  JButton();
+        pnl_results = new  JPanel();
+        lbl_result = new  JLabel();
+        jSeparator2 = new  JSeparator();
+        jScrollPane1 = new  JScrollPane();
+        lst_restaurants = new  JList<>();
+        lbl_sortby = new  JLabel();
+        cbo_sortby = new  JComboBox<>();
+        pnl_map = new  JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(150, 50));
         setName("Main Page"); // NOI18N
-        addWindowStateListener(new java.awt.event.WindowStateListener() {
+        addWindowStateListener(new  WindowStateListener() {
             public void windowStateChanged(java.awt.event.WindowEvent evt) {
                 formWindowStateChanged(evt);
             }
         });
 
-        pnl_header.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_header.setBorder( BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lbl_header.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         lbl_header.setForeground(new java.awt.Color(0, 102, 204));
         lbl_header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_header.setText("              Top Dominating Restaurants Finder");
 
-        javax.swing.GroupLayout pnl_headerLayout = new javax.swing.GroupLayout(pnl_header);
+        javax.swing.GroupLayout pnl_headerLayout = new  GroupLayout(pnl_header);
         pnl_header.setLayout(pnl_headerLayout);
         pnl_headerLayout.setHorizontalGroup(
-            pnl_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            pnl_headerLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
             .addGroup(pnl_headerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_header, javax.swing.GroupLayout.DEFAULT_SIZE, 1206, Short.MAX_VALUE)
@@ -119,7 +143,7 @@ public class Frm_Main extends javax.swing.JFrame {
         pnl_search.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         lbl_search.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
-        lbl_search.setText("Search");
+        lbl_search.setText("Search Attributes");
 
         lbl_cuisine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_cuisine.setText("Cuisine:");
@@ -135,7 +159,19 @@ public class Frm_Main extends javax.swing.JFrame {
         });
 
         cbo_cuisine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ...", "American", "Italian", "Mexican", "Chinese", "Indian", "Nepalese" }));
+        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ...", 
+        		"American", 
+        		"Italian", 
+        		"Mexican",
+        		"Japanese", 
+        		"Chinese", 
+        		"Indian", 
+        		"Nepalese", 
+        		"Thai" ,
+        		"Mediterranean",
+        		"Turkish", 
+        		"Greek", 
+        		"Caribbean"}));
 
         btn_search.setBackground(new java.awt.Color(0, 102, 204));
         btn_search.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -187,21 +223,42 @@ public class Frm_Main extends javax.swing.JFrame {
                 .addComponent(btn_search)
                 .addGap(21, 21, 21))
         );
+        
+        
+        btn_search.addActionListener(new ActionListener()
+        		{
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub+
+						
+						 mapView.removeAll();
+						 mapView = new GeocoderExample();
+						//mapView.repaint();
+						 lst_restaurants.removeAll();
+						 SearchAction();
+						
+				         mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
+				         mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
+				  		 
+					}
+        	
+        	
+        		});
 
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        lbl_result.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        lbl_result.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_result.setText("Results");
-
         lst_restaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        
         Vector<String> vec  = restuarantName;
         
-        System.out.println(vec.size());
-        
-        lst_restaurants.setModel(new javax.swing.AbstractListModel<String>() 
+        lst_restaurants.setModel(new AbstractListModel<String>() 
         {
-            String[] strings = { "1. Restaurant 1", "2. Restaurant 2", "3. Restaurant 3", "4. Restaurant 4", "5. Restaurant 5" };
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 4267073180687045665L;
+			String[] strings = { "1. Restaurant 1", "2. Restaurant 2", "3. Restaurant 3", "4. Restaurant 4", "5. Restaurant 5" };
             
             public int getSize() { 
             	
@@ -313,60 +370,50 @@ public class Frm_Main extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_formWindowStateChanged
 
-    /**
-     * @param args the command line arguments
-     */
+    private static Frm_Main mainFrame;
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+ 
+  	  PatternTheme pat =  new PatternTheme();
+    	try {
+    		UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel"); 	
+    		 	pat.setUpColor();	
+    		 	pat.setName("Search Engine");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
-                GeocoderExample mapView = new GeocoderExample();
-       
                 
                 try {
 					String str = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , "Mexican" , JSonParser.KEy , 4);
 					JSonParser.getData(str);		
 					
 					restuarantName  = JSonParser.getResVec();
-			         Frm_Main mainFrame = new Frm_Main();
-		             mainFrame.pnl_map.removeAll();
-					Vector<String > strPid  = JSonParser.getResPID();
-		                
+			        mainFrame = new Frm_Main();
+		            mainFrame.pnl_map.removeAll();
+ 
+		            Vector<String > strPid  = JSonParser.getResPID();
+		            mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
 		                for (int i = 0 ; i < restuarantName.size() ; i++ )
 		                {
-		                	System.out.println(restuarantName.get(i).toString());
 		                    mapView.performGeocode( restuarantName.get(i).toString() );
 		                }
-		            
-		                
+ 
 		                mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
 		                mainFrame.pnl_map.validate();
 		                mainFrame.pnl_map.setVisible(true);
-		                //mainFrame.add(pnl_map);
+		                mainFrame.add(mainFrame.pnl_map);
 		                mainFrame.setVisible(true);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -376,5 +423,38 @@ public class Frm_Main extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    public void SearchAction()
+    {
+    	String cuisine = cbo_cuisine.getSelectedItem().toString();
+    	
+    	double radius =  Double.parseDouble(txt_searchrange.getText().toString().trim());
+    	
+    	restuarantName.removeAllElements();
+    	if(!cuisine.isEmpty() && radius != 0.0)
+    	{
+			try {
+				String str  = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , cuisine , JSonParser.KEy , radius);
+				JSonParser.getData(str);
+				restuarantName  = JSonParser.getResVec();
+				 for (int i = 0 ; i < restuarantName.size() ; i++ )
+	                {
+	                	System.out.println(restuarantName.get(i).toString());	
+	                    mapView.performGeocode( restuarantName.get(i).toString() );
+	                }
+				
+			} catch (ParseException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				
+    	}
+    	
+ 
+    }
+    
+    
+    
 
 }

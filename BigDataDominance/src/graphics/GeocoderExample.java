@@ -44,14 +44,16 @@ public class GeocoderExample extends MapView {
     public GeocoderExample() {
      
         setOnMapReadyHandler(new MapReadyHandler() {
-            @Override
+            @SuppressWarnings("deprecation")
+			@Override
             public void onMapReady(MapStatus status) {
                 // Getting the associated map object
                 final Map map = getMap();
                 // Setting initial zoom value
-                map.setZoom(10.0);
+                map.setZoom(12.0);
                 // Creating a map options object
-                MapOptions options = new MapOptions(map);
+                @SuppressWarnings("deprecation")
+				MapOptions options = new MapOptions(map);
                 // Creating a map type control options object
                 MapTypeControlOptions controlOptions = new MapTypeControlOptions(map);
                 // Changing position of the map type control
