@@ -32,6 +32,7 @@ TopDominating ::TopDominating(int items, int MyLat, int MyLng)
 	{
 		Restaurant[i].distance = sqrt(pow(Restaurant[i].lat - MyLat, 2) + pow(Restaurant[i].lng - MyLng, 2));
 		Restaurant[i].check = true;
+
 	}
 	
 }

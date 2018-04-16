@@ -12,14 +12,9 @@ import java.util.List;
  */
 public class SkylineAlgo {
 	
-	
-	
-	
+
 	public static void main(String[] args)
 	{
-		
-		//asodkas
-		
 		
 		int[][] skyscraper = {
 			    {2,9,10}, 

@@ -15,7 +15,7 @@ import com.teamdev.jxmaps.MapStatus;
 import com.teamdev.jxmaps.MapTypeControlOptions;
 import com.teamdev.jxmaps.Marker;
 import com.teamdev.jxmaps.swing.MapView;
-
+import tools.Tools;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
@@ -72,7 +72,7 @@ public class GeocoderExample extends MapView {
     public void addNotify() {
         super.addNotify();
 
-        optionsWindow = new OptionsWindow(this, new Dimension(300, 400)) {
+        optionsWindow = new OptionsWindow(this, new Dimension(500, 600)) {
             @Override
             public void initContent(JWindow contentWindow) {
                 JPanel content = new JPanel(new GridBagLayout());
@@ -196,6 +196,8 @@ public class GeocoderExample extends MapView {
                     Marker marker = new Marker(map);
                     // Setting position of the marker to the result location
                     marker.setPosition(location);
+                    
+ 
                     // Creating an information window
                     InfoWindow infoWindow = new InfoWindow(map);
                     // Putting the address and location to the content of the information window
@@ -214,21 +216,16 @@ public class GeocoderExample extends MapView {
         }
     }
     
-    public void performGeocode(String Name ,String lat , String lon ) {
+    public void performGeocode(String Name ,Double lat , Double lon ) {
         // Getting the associated map object
-    	
     	try{
         final Map map = getMap();
         // Creating a geocode request
         GeocoderRequest request = new GeocoderRequest(map);
         // Setting address to the geocode request
- 
-        LatLngBounds lg ;
-         
+        LatLng location = new LatLng( lat , lon);
         
-        //request.setLocation(lat);
-        request.setAddress(Name);
-   
+        request.setLocation(location);
         // Geocoding position by the entered address
         getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
             @Override
@@ -237,13 +234,6 @@ public class GeocoderExample extends MapView {
                 if ((status == GeocoderStatus.OK) && (results.length > 0)) {
                     // Getting the first result
                     GeocoderResult result = results[0];
-                    // Getting a location of the result
-                    
-                   /*String name =  result.getJSObject().f_();
-                   
-                   System.out.println(name);
-                   */
-                   
                     LatLng location = result.getGeometry().getLocation();
                     // Setting the map center to result location
                     map.setCenter(location);
@@ -251,10 +241,12 @@ public class GeocoderExample extends MapView {
                     Marker marker = new Marker(map);
                     // Setting position of the marker to the result location
                     marker.setPosition(location);
+                    
+                    marker.setTitle(Name);
                     // Creating an information window
                     InfoWindow infoWindow = new InfoWindow(map);
                     // Putting the address and location to the content of the information window
-                    infoWindow.setContent("<b>" + Name+ "</b><br>" + location.toString());
+                    infoWindow.setContent("<b>" + Name+ "</b><br>" + Tools.distance(41.1536674 , -81.3578859, lat, lon) + " mi");
                     // Moving the information window to the result location
                     infoWindow.setPosition(location);
                     // Showing of the information window
@@ -268,5 +260,7 @@ public class GeocoderExample extends MapView {
         	
         }
     }
+    
+ 
  
 }

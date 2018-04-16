@@ -28,49 +28,44 @@ public class JSonParser {
 	private static HashMap<Integer , Vector<Object>> retreiveData ;
 	private static Vector<String> resVec =  new Vector<String>(); 
 	private static Vector<String> resPID =  new Vector<String>(); 
+    public static Vector<Double[]> restuarantlatlng =  new Vector<Double[]>();
+ 
 	/**
-	 * @return the resPID
+	 * @return the restuarantlatlng
 	 */
-	public static Vector<String> getResPID() {
-		return resPID;
+	public static Vector<Double[]> getRestuarantlatlng() {
+		return restuarantlatlng;
 	}
 
 
 	/**
-	 * @param resPID the resPID to set
+	 * @param restuarantlatlng the restuarantlatlng to set
 	 */
+	public static void setRestuarantlatlng(Vector<Double[]> restuarantlatlng) {
+		JSonParser.restuarantlatlng = restuarantlatlng;
+	}
+
+
+	public static Vector<String> getResPID() {
+		return resPID;
+	}
+
+ 
 	public static void setResPID(Vector<String> resPID) {
 		JSonParser.resPID = resPID;
 	}
 
 
-	/**
-	 * @return the resVec
-	 */
+ 
 	public static Vector<String> getResVec() {
 		return resVec;
 	}
 
-
-	/**
-	 * @param resVec the resVec to set
-	 */
+ 
 	public static void setResVec(Vector<String> resVec) {
 		JSonParser.resVec = resVec;
 	}
-
-
-	public static void main(String[] args) {
  
-		try {
-			RestaurantsWithInRadius(41.1536674 , -81.3578859 , "Mexican" , KEy , 10);
-		} catch (ParseException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		  
-	}
-	 
 	
 	public static String NearByRestaurants(double lat , double longtitude , String cuisine , String key )
 	{
@@ -93,7 +88,6 @@ public class JSonParser {
 
             while ((inputLine = in.readLine()) != null) { 
             	   stringBuilder.append(inputLine);
-            	   //System.out.println("data" + String.valueOf(inputLine));
  
            }
      
@@ -149,6 +143,8 @@ public class JSonParser {
 	                resVec.addElement(name);
 	                resPID.addElement(place_id);
 	                retreiveData.put(i, data);
+	                restuarantlatlng.addElement(geo);
+	                setRestuarantlatlng(restuarantlatlng);
  
 	        	   }
 
@@ -177,7 +173,7 @@ public class JSonParser {
 
            try {           
                HttpClient client = new DefaultHttpClient(); 
-           	 String url  = "https://maps.googleapis.com/maps/api/place/nearbysearch/"
+               String url  = "https://maps.googleapis.com/maps/api/place/nearbysearch/"
         			+ "json?location="+lat+","+longtitude+"&"+
         			"rankby=distance&types=restaurant&"
         			+"keyword="+cuisine+""
@@ -206,5 +202,5 @@ public class JSonParser {
  
           
        }
-	
+ 
 }

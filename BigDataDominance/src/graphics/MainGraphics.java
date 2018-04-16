@@ -7,6 +7,7 @@ package graphics;
 
 import graphics.GeocoderExample;
 import tools.JSonParser;
+import tools.Tools;
 
 import java.awt.BorderLayout;
 import java.awt.Frame;
@@ -36,7 +37,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author Pavan
  */
-public class Frm_Main extends javax.swing.JFrame {
+public class MainGraphics extends javax.swing.JFrame {
 
     /**
 	 * 
@@ -61,7 +62,7 @@ public class Frm_Main extends javax.swing.JFrame {
     private  JLabel lbl_sortby;
     private  JList<String> lst_restaurants;
     public  JPanel pnl_header;
-    private  JPanel pnl_map;
+    private static  JPanel pnl_map;
     private  JPanel pnl_results;
     private  JPanel pnl_search;
     private JTextField txt_searchrange;
@@ -70,12 +71,12 @@ public class Frm_Main extends javax.swing.JFrame {
     private String SelectedCuisine;
     private Double RadiusMile;
     private static GeocoderExample mapView = new GeocoderExample();
- 
-    
-    
     public static Vector<String> restuarantName =  new Vector<String>();
+    public static Vector<Double[]> restuarantlatlng =  new Vector<Double[]>();
 	
-    public Frm_Main() {
+ 
+
+	public MainGraphics() {
         initComponents();
     }
 
@@ -238,14 +239,15 @@ public class Frm_Main extends javax.swing.JFrame {
 						 SearchAction();
 						
 				         mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
-				         mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
+				         MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
 				         mainFrame.repaint();
-				         mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
-			             mainFrame.pnl_map.validate();
-			             mainFrame.pnl_map.setVisible(true);
-			             mainFrame.add(mainFrame.pnl_map);
+				         MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
+			             MainGraphics.pnl_map.validate();
+			             MainGraphics.pnl_map.setVisible(true);
+			             mainFrame.add(MainGraphics.pnl_map);
 			             mainFrame.setVisible(true);
-			             mainFrame.repaint();
+			           
+			            // mainFrame.repaint();
 				  		 
 					}
         	
@@ -256,8 +258,11 @@ public class Frm_Main extends javax.swing.JFrame {
         lbl_result.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_result.setText("Results");
         lst_restaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         Vector<String> vec  = restuarantName;
         
+        Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
+      
         lst_restaurants.setModel(new AbstractListModel<String>() 
         {
             /**
@@ -281,7 +286,20 @@ public class Frm_Main extends javax.swing.JFrame {
             	if (vec.size() == 0)
             	return strings[i]; 
             	
-            	else return vec.get(i).toString();
+            	else
+            		{
+ 
+            		if (lltVec.size() > 0)
+            		{
+            			return vec.get(i).toString() + "	[" + Tools.distance(41.1536674 , -81.3578859 , lltVec.get(i)[0], lltVec.get(i)[1]) + " mi] ";
+            		}
+            		
+            		
+            		else {
+            			  return vec.get(i).toString();
+            		}
+
+            		}
             	
             }
         });
@@ -376,7 +394,7 @@ public class Frm_Main extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_formWindowStateChanged
 
-    private static Frm_Main mainFrame;
+    private static MainGraphics mainFrame;
     public static void main(String args[]) {
  
   	  PatternTheme pat =  new PatternTheme();
@@ -406,20 +424,25 @@ public class Frm_Main extends javax.swing.JFrame {
 					JSonParser.getData(str);		
 					
 					restuarantName  = JSonParser.getResVec();
-			        mainFrame = new Frm_Main();
+			        mainFrame = new MainGraphics();
 		            //mainFrame.pnl_map.removeAll();
+  
+		            restuarantlatlng =  JSonParser.getRestuarantlatlng();
  
-		            Vector<String > strPid  = JSonParser.getResPID();
 		            mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
+		            
+		            
 		                for (int i = 0 ; i < restuarantName.size() ; i++ )
 		                {
-		                    mapView.performGeocode( restuarantName.get(i).toString() );
+		                	Double[] latlng = restuarantlatlng.get(i);
+		                    mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1] );
 		                }
  
-		                mainFrame.pnl_map.add(mapView, BorderLayout.CENTER);
-		                mainFrame.pnl_map.validate();
-		                mainFrame.pnl_map.setVisible(true);
-		                mainFrame.add(mainFrame.pnl_map);
+		                MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
+		                MainGraphics.pnl_map.validate();
+		                MainGraphics.pnl_map.setVisible(true);
+		                mainFrame.setResizable(true);
+		                mainFrame.add(pnl_map);
 		                mainFrame.setVisible(true);
 		               
 				} catch (Exception e) {
@@ -439,16 +462,23 @@ public class Frm_Main extends javax.swing.JFrame {
     	double radius =  Double.parseDouble(txt_searchrange.getText().toString().trim());
     	
     	restuarantName.removeAllElements();
+    	restuarantlatlng.removeAllElements();
     	if(!cuisine.isEmpty() && radius != 0.0)
     	{
 			try {
 				String str  = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , cuisine , JSonParser.KEy , radius);
+				
 				JSonParser.getData(str);
-				restuarantName  = JSonParser.getResVec();
+				
+				 restuarantName  = JSonParser.getResVec();
+				 restuarantlatlng =  JSonParser.getRestuarantlatlng();
+				 
+				 
 				 for (int i = 0 ; i < restuarantName.size() ; i++ )
 	                {
-	                	System.out.println(restuarantName.get(i).toString());	
-	                    mapView.performGeocode( restuarantName.get(i).toString() );
+					 	 Double[] latlng = restuarantlatlng.get(i);
+						// System.out.println("Res" + restuarantName.get(i).toString() + " | " + latlng[0]  +" / "+  latlng[1] );
+					     mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1] );
 	                }
 				
 			} catch (ParseException | IOException e) {
