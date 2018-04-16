@@ -182,13 +182,7 @@ public class GeocoderExample extends MapView {
                 if ((status == GeocoderStatus.OK) && (results.length > 0)) {
                     // Getting the first result
                     GeocoderResult result = results[0];
-                    // Getting a location of the result
-                    
-                   /*String name =  result.getJSObject().f_();
-                   
-                   System.out.println(name);
-                   */
-                   
+        
                     LatLng location = result.getGeometry().getLocation();
                     // Setting the map center to result location
                     map.setCenter(location);
@@ -216,7 +210,7 @@ public class GeocoderExample extends MapView {
         }
     }
     
-    public void performGeocode(String Name ,Double lat , Double lon ) {
+    public void performGeocode(String Name ,Double lat , Double lon  , int Price, Double Score) {
         // Getting the associated map object
     	try{
         final Map map = getMap();
@@ -246,7 +240,9 @@ public class GeocoderExample extends MapView {
                     // Creating an information window
                     InfoWindow infoWindow = new InfoWindow(map);
                     // Putting the address and location to the content of the information window
-                    infoWindow.setContent("<b>" + Name+ "</b><br>" + Tools.distance(41.1536674 , -81.3578859, lat, lon) + " mi");
+                     String dis  = Tools.distance(41.1536674 , -81.3578859, lat, lon) + " mi";
+                    
+                    infoWindow.setContent("<b>" + Name+ "</b><br> Dis: " + dis + "</b><br> Score: " + Score + "</b><br>Price: " + Price);
                     // Moving the information window to the result location
                     infoWindow.setPosition(location);
                     // Showing of the information window

@@ -67,12 +67,12 @@ public class MainGraphics extends javax.swing.JFrame {
     private  JPanel pnl_search;
     private JTextField txt_searchrange;
     // End of variables declaration//GEN-END:variables
-    
-    private String SelectedCuisine;
-    private Double RadiusMile;
+   
     private static GeocoderExample mapView = new GeocoderExample();
     public static Vector<String> restuarantName =  new Vector<String>();
     public static Vector<Double[]> restuarantlatlng =  new Vector<Double[]>();
+    public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
+	public static Vector<Double> restuarantScore =  new Vector<Double>();
 	
  
 
@@ -262,6 +262,8 @@ public class MainGraphics extends javax.swing.JFrame {
         Vector<String> vec  = restuarantName;
         
         Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
+        Vector<Integer> price =   JSonParser.getRestuarantPrice();
+        Vector<Double> Score =   JSonParser.getRestuarantScore();
       
         lst_restaurants.setModel(new AbstractListModel<String>() 
         {
@@ -291,7 +293,7 @@ public class MainGraphics extends javax.swing.JFrame {
  
             		if (lltVec.size() > 0)
             		{
-            			return vec.get(i).toString() + "	[" + Tools.distance(41.1536674 , -81.3578859 , lltVec.get(i)[0], lltVec.get(i)[1]) + " mi] ";
+            			return vec.get(i).toString() + " [" + Tools.distance(41.1536674 , -81.3578859 , lltVec.get(i)[0], lltVec.get(i)[1]) + " mi ] [ Score " +Score.get(i)+"| Price :" + 													Tools.GetChar(price.get(i))+"]";
             		}
             		
             		
@@ -428,6 +430,8 @@ public class MainGraphics extends javax.swing.JFrame {
 		            //mainFrame.pnl_map.removeAll();
   
 		            restuarantlatlng =  JSonParser.getRestuarantlatlng();
+		            restuarantPrice  = JSonParser.getRestuarantPrice();
+		            restuarantScore  = JSonParser.getRestuarantScore();
  
 		            mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
 		            
@@ -435,7 +439,7 @@ public class MainGraphics extends javax.swing.JFrame {
 		                for (int i = 0 ; i < restuarantName.size() ; i++ )
 		                {
 		                	Double[] latlng = restuarantlatlng.get(i);
-		                    mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1] );
+		                	mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
 		                }
  
 		                MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
@@ -463,22 +467,23 @@ public class MainGraphics extends javax.swing.JFrame {
     	
     	restuarantName.removeAllElements();
     	restuarantlatlng.removeAllElements();
+    	restuarantScore.removeAllElements();
+    	restuarantPrice.removeAllElements();
+    	
     	if(!cuisine.isEmpty() && radius != 0.0)
     	{
 			try {
-				String str  = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , cuisine , JSonParser.KEy , radius);
-				
-				JSonParser.getData(str);
-				
-				 restuarantName  = JSonParser.getResVec();
+				 String str  = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , cuisine , JSonParser.KEy , radius);
+				 JSonParser.getData(str);
+				 restuarantName   = JSonParser.getResVec();
 				 restuarantlatlng =  JSonParser.getRestuarantlatlng();
-				 
-				 
+				 restuarantPrice  = JSonParser.getRestuarantPrice();
+				 restuarantScore  = JSonParser.getRestuarantScore();
+ 
 				 for (int i = 0 ; i < restuarantName.size() ; i++ )
 	                {
 					 	 Double[] latlng = restuarantlatlng.get(i);
-						// System.out.println("Res" + restuarantName.get(i).toString() + " | " + latlng[0]  +" / "+  latlng[1] );
-					     mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1] );
+					     mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
 	                }
 				
 			} catch (ParseException | IOException e) {

@@ -36,4 +36,34 @@ public class Tools {
 		return Double.parseDouble(myFormatter.format(value));
 	}
 	
+	
+	public static String GetChar(int i)
+	{
+		String str  = "0";
+		switch(i)
+		{
+		case 0:	str = "0";
+		break;
+		
+		case 1:	str = "$";
+		break;	
+		
+		case 2:	str = "$$";
+		break;	
+		
+		case 3:	str = "$$$";
+		break;	
+		
+		case 4:	str = "$$$$";
+		break;	
+		
+		case 5:	str = "$$$$$";
+		break;	
+		
+		
+		}
+		
+		return str;
+	}
+	
 }

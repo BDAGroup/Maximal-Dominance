@@ -29,6 +29,46 @@ public class JSonParser {
 	private static Vector<String> resVec =  new Vector<String>(); 
 	private static Vector<String> resPID =  new Vector<String>(); 
     public static Vector<Double[]> restuarantlatlng =  new Vector<Double[]>();
+    public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
+	public static Vector<Double> restuarantScore =  new Vector<Double>();
+	/**
+	 * @return the restuarantPrice
+	 */
+	public static Vector<Integer> getRestuarantPrice() {
+		return restuarantPrice;
+	}
+
+
+	/**
+	 * @param restuarantPrice the restuarantPrice to set
+	 */
+	public static void setRestuarantPrice(Vector<Integer> restuarantPrice) {
+		JSonParser.restuarantPrice = restuarantPrice;
+	}
+
+
+
+    /**
+	 * @return the restuarantScore
+	 */
+	public static Vector<Double> getRestuarantScore() {
+		return restuarantScore;
+	}
+
+
+	/**
+	 * @param restuarantScore the restuarantScore to set
+	 */
+	public static void setRestuarantScore(Vector<Double> restuarantScore) {
+		JSonParser.restuarantScore = restuarantScore;
+	}
+
+
+	/**
+	 * @return the restuarantPrice
+	 */
+ 
+
  
 	/**
 	 * @return the restuarantlatlng
@@ -144,7 +184,11 @@ public class JSonParser {
 	                resPID.addElement(place_id);
 	                retreiveData.put(i, data);
 	                restuarantlatlng.addElement(geo);
+	                restuarantPrice.addElement(price_level);
+	                restuarantScore.addElement(rating);
 	                setRestuarantlatlng(restuarantlatlng);
+	                setRestuarantPrice(restuarantPrice);
+	                setRestuarantScore(restuarantScore);
  
 	        	   }
 
