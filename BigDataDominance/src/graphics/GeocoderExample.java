@@ -7,6 +7,7 @@ import com.teamdev.jxmaps.GeocoderResult;
 import com.teamdev.jxmaps.GeocoderStatus;
 import com.teamdev.jxmaps.InfoWindow;
 import com.teamdev.jxmaps.LatLng;
+import com.teamdev.jxmaps.LatLngBounds;
 import com.teamdev.jxmaps.Map;
 import com.teamdev.jxmaps.MapOptions;
 import com.teamdev.jxmaps.MapReadyHandler;
@@ -14,7 +15,7 @@ import com.teamdev.jxmaps.MapStatus;
 import com.teamdev.jxmaps.MapTypeControlOptions;
 import com.teamdev.jxmaps.Marker;
 import com.teamdev.jxmaps.swing.MapView;
-
+import tools.Tools;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
@@ -43,18 +44,20 @@ public class GeocoderExample extends MapView {
     public GeocoderExample() {
      
         setOnMapReadyHandler(new MapReadyHandler() {
-            @Override
+            @SuppressWarnings("deprecation")
+			@Override
             public void onMapReady(MapStatus status) {
                 // Getting the associated map object
                 final Map map = getMap();
                 // Setting initial zoom value
-                map.setZoom(7.0);
+                map.setZoom(12.0);
                 // Creating a map options object
-                MapOptions options = new MapOptions(map);
+                @SuppressWarnings("deprecation")
+				MapOptions options = new MapOptions(map);
                 // Creating a map type control options object
                 MapTypeControlOptions controlOptions = new MapTypeControlOptions(map);
                 // Changing position of the map type control
-                controlOptions.setPosition(ControlPosition.TOP_RIGHT);
+                controlOptions.setPosition(ControlPosition.RIGHT_BOTTOM);
                 // Setting map type control options
                 options.setMapTypeControlOptions(controlOptions);
                 // Setting map options
@@ -69,18 +72,18 @@ public class GeocoderExample extends MapView {
     public void addNotify() {
         super.addNotify();
 
-        optionsWindow = new OptionsWindow(this, new Dimension(300, 400)) {
+        optionsWindow = new OptionsWindow(this, new Dimension(500, 600)) {
             @Override
             public void initContent(JWindow contentWindow) {
                 JPanel content = new JPanel(new GridBagLayout());
                 content.setBackground(Color.white);
 
-                Font robotoPlain13 = new Font("Roboto", 0, 13);
+                Font robotoPlain18 = new Font("Roboto", 0, 18);
                 final JTextField searchField = new JTextField();
                 searchField.setText(INITIAL_LOCATION);
                 searchField.setToolTipText("Enter address or coordinates...");
                 searchField.setBorder(BorderFactory.createEmptyBorder());
-                searchField.setFont(robotoPlain13);
+                searchField.setFont(robotoPlain18);
                 searchField.setForeground(new Color(0x21, 0x21, 0x21));
                 searchField.setUI(new SearchFieldUI(searchField));
 
@@ -107,7 +110,7 @@ public class GeocoderExample extends MapView {
                 searchButton.addActionListener(searchActionListener);
                 searchField.addActionListener(searchActionListener);
 
-               content.add(searchField, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(11, 11, 11, 0), 0, 0));
+                content.add(searchField, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(0, 11, 11, 11), 0, 0));
                 content.add(searchButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(11, 0, 11, 11), 0, 0));
 
                 contentWindow.getContentPane().add(content);
@@ -117,9 +120,9 @@ public class GeocoderExample extends MapView {
             protected void updatePosition() {
                 if (parentFrame.isVisible()) {
                     Point newLocation = parentFrame.getContentPane().getLocationOnScreen();
-                    newLocation.translate(80, 100);
+                    newLocation.translate(400, 110);
                     contentWindow.setLocation(newLocation);
-                    contentWindow.setSize(320, 40);
+                    contentWindow.setSize(150, 40);
                 }
             }
         };
@@ -160,14 +163,17 @@ public class GeocoderExample extends MapView {
         optionsWindow.dispose();
     }
 
-    private void performGeocode(String text) {
+    public void performGeocode(String text) {
         // Getting the associated map object
+    	
+    	try{
         final Map map = getMap();
         // Creating a geocode request
         GeocoderRequest request = new GeocoderRequest(map);
         // Setting address to the geocode request
+ 
         request.setAddress(text);
-
+   
         // Geocoding position by the entered address
         getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
             @Override
@@ -176,7 +182,7 @@ public class GeocoderExample extends MapView {
                 if ((status == GeocoderStatus.OK) && (results.length > 0)) {
                     // Getting the first result
                     GeocoderResult result = results[0];
-                    // Getting a location of the result
+        
                     LatLng location = result.getGeometry().getLocation();
                     // Setting the map center to result location
                     map.setCenter(location);
@@ -184,10 +190,12 @@ public class GeocoderExample extends MapView {
                     Marker marker = new Marker(map);
                     // Setting position of the marker to the result location
                     marker.setPosition(location);
+                    
+ 
                     // Creating an information window
                     InfoWindow infoWindow = new InfoWindow(map);
                     // Putting the address and location to the content of the information window
-                    infoWindow.setContent("<b>" + result.getFormattedAddress() + "</b><br>" + location.toString());
+                    infoWindow.setContent("<b>" + text+ "</b><br>" + location.toString());
                     // Moving the information window to the result location
                     infoWindow.setPosition(location);
                     // Showing of the information window
@@ -196,5 +204,59 @@ public class GeocoderExample extends MapView {
             }
         });
     }
+    	  catch(Exception e )
+        {
+        	
+        }
+    }
+    
+    public void performGeocode(String Name ,Double lat , Double lon  , int Price, Double Score) {
+        // Getting the associated map object
+    	try{
+        final Map map = getMap();
+        // Creating a geocode request
+        GeocoderRequest request = new GeocoderRequest(map);
+        // Setting address to the geocode request
+        LatLng location = new LatLng( lat , lon);
+        
+        request.setLocation(location);
+        // Geocoding position by the entered address
+        getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
+            @Override
+            public void onComplete(GeocoderResult[] results, GeocoderStatus status) {
+                // Checking operation status
+                if ((status == GeocoderStatus.OK) && (results.length > 0)) {
+                    // Getting the first result
+                    GeocoderResult result = results[0];
+                    LatLng location = result.getGeometry().getLocation();
+                    // Setting the map center to result location
+                    map.setCenter(location);
+                    // Creating a marker object
+                    Marker marker = new Marker(map);
+                    // Setting position of the marker to the result location
+                    marker.setPosition(location);
+                    
+                    marker.setTitle(Name);
+                    // Creating an information window
+                    InfoWindow infoWindow = new InfoWindow(map);
+                    // Putting the address and location to the content of the information window
+                     String dis  = Tools.distance(41.1536674 , -81.3578859, lat, lon) + " mi";
+                    
+                    infoWindow.setContent("<b>" + Name+ "</b><br> Dis: " + dis + "</b><br> Score: " + Score + "</b><br>Price: " + Tools.GetChar(Price));
+                    // Moving the information window to the result location
+                    infoWindow.setPosition(location);
+                    // Showing of the information window
+                    infoWindow.open(map, marker);
+                }
+            }
+        });
+    }
+    	  catch(Exception e )
+        {
+        	
+        }
+    }
+    
+ 
  
 }
