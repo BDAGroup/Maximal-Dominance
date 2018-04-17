@@ -57,7 +57,7 @@ public class GeocoderExample extends MapView {
                 // Creating a map type control options object
                 MapTypeControlOptions controlOptions = new MapTypeControlOptions(map);
                 // Changing position of the map type control
-                controlOptions.setPosition(ControlPosition.TOP_RIGHT);
+                controlOptions.setPosition(ControlPosition.RIGHT_BOTTOM);
                 // Setting map type control options
                 options.setMapTypeControlOptions(controlOptions);
                 // Setting map options
@@ -110,7 +110,7 @@ public class GeocoderExample extends MapView {
                 searchButton.addActionListener(searchActionListener);
                 searchField.addActionListener(searchActionListener);
 
-               content.add(searchField, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(11, 11, 11, 0), 0, 0));
+                content.add(searchField, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(0, 11, 11, 11), 0, 0));
                 content.add(searchButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(11, 0, 11, 11), 0, 0));
 
                 contentWindow.getContentPane().add(content);
@@ -120,9 +120,9 @@ public class GeocoderExample extends MapView {
             protected void updatePosition() {
                 if (parentFrame.isVisible()) {
                     Point newLocation = parentFrame.getContentPane().getLocationOnScreen();
-                    newLocation.translate(455, 115);
+                    newLocation.translate(400, 110);
                     contentWindow.setLocation(newLocation);
-                    contentWindow.setSize(320, 40);
+                    contentWindow.setSize(150, 40);
                 }
             }
         };

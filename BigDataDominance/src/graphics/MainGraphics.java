@@ -239,7 +239,7 @@ public class MainGraphics extends javax.swing.JFrame {
 						 SearchAction();
 						
 				         mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
-				         MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
+				       
 				         mainFrame.repaint();
 				         MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
 			             MainGraphics.pnl_map.validate();
@@ -427,7 +427,7 @@ public class MainGraphics extends javax.swing.JFrame {
 					
 					restuarantName  = JSonParser.getResVec();
 			        mainFrame = new MainGraphics();
-		            //mainFrame.pnl_map.removeAll();
+			        MainGraphics.pnl_map.removeAll();
   
 		            restuarantlatlng =  JSonParser.getRestuarantlatlng();
 		            restuarantPrice  = JSonParser.getRestuarantPrice();
@@ -441,12 +441,11 @@ public class MainGraphics extends javax.swing.JFrame {
 		                	Double[] latlng = restuarantlatlng.get(i);
 		                	mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
 		                }
- 
+		               
 		                MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
 		                MainGraphics.pnl_map.validate();
 		                MainGraphics.pnl_map.setVisible(true);
 		                mainFrame.setResizable(true);
-		                mainFrame.add(pnl_map);
 		                mainFrame.setVisible(true);
 		               
 				} catch (Exception e) {
