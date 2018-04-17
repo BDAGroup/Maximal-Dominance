@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="Jars">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Jars/httpcore-4.4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/jackson-core-2.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/jackson-annotations-2.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/license.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/httpclient-4.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/jxbrowser-6.19.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/json-simple-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/dom4j-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/jxmaps-win-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/dom4j-1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/jackson-databind-2.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/JTattoo-1.6.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/jxmaps-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/jxbrowser-win32-6.19.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jars/json-20160212.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
