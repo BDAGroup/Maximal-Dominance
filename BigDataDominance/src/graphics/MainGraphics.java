@@ -423,6 +423,8 @@ public class MainGraphics extends javax.swing.JFrame {
                 
                 try {
 					String str = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , "Mexican" , JSonParser.KEy , 4);
+					
+					
 					JSonParser.getData(str);		
 					
 					restuarantName  = JSonParser.getResVec();
@@ -442,6 +444,10 @@ public class MainGraphics extends javax.swing.JFrame {
 		                	mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
 		                }
 		               
+		                mainFrame.txt_searchrange.setText("4");
+		                mainFrame.cbo_cuisine.setSelectedIndex(3);
+		                
+		                
 		                MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
 		                MainGraphics.pnl_map.validate();
 		                MainGraphics.pnl_map.setVisible(true);

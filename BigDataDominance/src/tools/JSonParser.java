@@ -107,7 +107,7 @@ public class JSonParser {
 	}
  
 	
-	public static String NearByRestaurants(double lat , double longtitude , String cuisine , String key )
+/*	public static String NearByRestaurants(double lat , double longtitude , String cuisine , String key )
 	{
  
         try {     
@@ -143,7 +143,7 @@ public class JSonParser {
         }  
         
         return null;
-	}
+	}*/
  	
 	public static HashMap<Integer , Vector<Object>> getData (String JsonResponse )
 	{
@@ -210,6 +210,7 @@ public class JSonParser {
 	}
 	
 	
+	@SuppressWarnings("resource")
 	public static String RestaurantsWithInRadius (double lat , double longtitude , String cuisine , String key , double radius) throws ParseException, FileNotFoundException, IOException 
 	{
 		   InputStream inputStream = null;
@@ -217,11 +218,14 @@ public class JSonParser {
 
            try {           
                HttpClient client = new DefaultHttpClient(); 
+               
+               
                String url  = "https://maps.googleapis.com/maps/api/place/nearbysearch/"
-        			+ "json?location="+lat+","+longtitude+"&"+
-        			"rankby=distance&types=restaurant&"
+        			+ "json?location="+lat+","+longtitude+"&radius="+radius*1609.34+"&&types=restaurant&"
         			+"keyword="+cuisine+""
         					+ "&key="+key+"";
+               
+        
                HttpPost post = new HttpPost(url);
                HttpResponse response = client.execute(post);
                HttpEntity entity = response.getEntity();

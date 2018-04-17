@@ -242,7 +242,7 @@ public class GeocoderExample extends MapView {
                     // Putting the address and location to the content of the information window
                      String dis  = Tools.distance(41.1536674 , -81.3578859, lat, lon) + " mi";
                     
-                    infoWindow.setContent("<b>" + Name+ "</b><br> Dis: " + dis + "</b><br> Score: " + Score + "</b><br>Price: " + Price);
+                    infoWindow.setContent("<b>" + Name+ "</b><br> Dis: " + dis + "</b><br> Score: " + Score + "</b><br>Price: " + Tools.GetChar(Price));
                     // Moving the information window to the result location
                     infoWindow.setPosition(location);
                     // Showing of the information window
