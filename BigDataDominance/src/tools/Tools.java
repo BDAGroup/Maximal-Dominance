@@ -39,7 +39,7 @@ public class Tools {
 	
 	public static String GetChar(int i)
 	{
-		String str  = "0";
+/*		String str  = "0";
 		switch(i)
 		{
 		case 0:	str = "0";
@@ -59,11 +59,10 @@ public class Tools {
 		
 		case 5:	str = "$$$$$";
 		break;	
+
+		}*/
 		
-		
-		}
-		
-		return str;
+		return String.valueOf(i);
 	}
 	
 }

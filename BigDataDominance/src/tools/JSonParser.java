@@ -33,6 +33,8 @@ public class JSonParser {
     public static Vector<Double[]> restuarantlatlng =  new Vector<Double[]>();
     public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
 	public static Vector<Double> restuarantScore =  new Vector<Double>();
+	public static SkylineMain Skymain ;
+
 	/**
 	 * @return the restuarantPrice
 	 */
@@ -150,6 +152,7 @@ public class JSonParser {
 	public static HashMap<Integer , Vector<Object>> getData (String JsonResponse )
 	{
 		try{
+				Skymain = new SkylineMain();
 			  JSONObject obj_JSONObject = new JSONObject(JsonResponse.toString());
 	           JSONArray results = obj_JSONObject.getJSONArray("results");
 	           retreiveData =  new HashMap<Integer , Vector<Object>>();
@@ -197,12 +200,10 @@ public class JSonParser {
 					   double dis =  Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
 					   Restaurants re = new Restaurants(dis , latitude ,longitude ,  rating , price_level , true );
 
-					   SkylineMain.Init(re);
+					   
+					   Skymain.Init(re);
 
 					   //SkylineMain.SortRestaurant();
-
-					   SkylineMain.Skyline(SkylineMain.SortRestaurant());
-
  
 	        	   }
 
@@ -210,7 +211,9 @@ public class JSonParser {
 	        		{
 	        			
 	        		}
+	        	   
 	           }
+	           Skymain.Skyline(Skymain.SortRestaurant());
 	           
 	           return retreiveData ;
 		}
@@ -239,7 +242,8 @@ public class JSonParser {
         			+"keyword="+cuisine+""
         					+ "&key="+key+"";
                
-        
+               System.out.println("Url " + url);
+               
                HttpPost post = new HttpPost(url);
                HttpResponse response = client.execute(post);
                HttpEntity entity = response.getEntity();

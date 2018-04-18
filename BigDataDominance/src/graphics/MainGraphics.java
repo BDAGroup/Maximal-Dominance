@@ -6,6 +6,7 @@
 package graphics;
 
 import graphics.GeocoderExample;
+import searchQuery.SkylineMain;
 import tools.JSonParser;
 import tools.Tools;
 
@@ -272,15 +273,10 @@ public class MainGraphics extends javax.swing.JFrame {
 			 */
 			private static final long serialVersionUID = 4267073180687045665L;
 			String[] strings = { "1. Restaurant 1", "2. Restaurant 2", "3. Restaurant 3", "4. Restaurant 4", "5. Restaurant 5" };
-            
+       
             public int getSize() { 
-            	
-            	if (vec.size() == 0)
-            	
-            	return strings.length; 
-            	
-            	else 
-            		return vec.size();
+           
+              return vec.size();
             }
             
             public String getElementAt(int i)
@@ -474,7 +470,7 @@ public class MainGraphics extends javax.swing.JFrame {
     	restuarantlatlng.removeAllElements();
     	restuarantScore.removeAllElements();
     	restuarantPrice.removeAllElements();
-    	
+ 
     	if(!cuisine.isEmpty() && radius != 0.0)
     	{
 			try {

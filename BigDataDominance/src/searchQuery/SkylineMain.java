@@ -1,29 +1,26 @@
 package searchQuery;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-
-import java.util.HashMap;
+ 
 import java.util.Vector;
 
 public class SkylineMain 
 {
 
 
-    public static Vector<Restaurants> RestaurantList   = new Vector<Restaurants>();
-    public static Vector<Restaurants> sortres   = new Vector<Restaurants>();
+    public   Vector<Restaurants> RestaurantList   = new Vector<Restaurants>();
+    public   Vector<Restaurants> sortres  ;
 
-    public static Restaurants temp;
+    public   Restaurants temp;
 
-    public static void Init(Restaurants e)
+    public   void Init(Restaurants e)
     {
         RestaurantList.addElement(e);
     }
 
 
 
-    public static Vector<Restaurants> SortRestaurant()
+    public   Vector<Restaurants> SortRestaurant()
     {
-
 
         for (int i = 0; i < RestaurantList.size()-1; i++)
         {
@@ -49,7 +46,7 @@ public class SkylineMain
 
                 }
             }
-            System.out.println("check: " + RestaurantList.get(i).isCheck());
+            //System.out.println("check: " + RestaurantList.get(i).isCheck());
         }
      
         return RestaurantList;
@@ -57,65 +54,53 @@ public class SkylineMain
     }
 
 
-   public static void Skyline(Vector<Restaurants> RestaurantList)
+   public   void Skyline(Vector<Restaurants> RestaurantList)
     {
-        int i = 0, j;
-
-       while (RestaurantList.get(i).isCheck() && i <= RestaurantList.size())
+        int i =0, j=0;
+        
+        sortres = new Vector<Restaurants>();
+ 
+        while (RestaurantList.get(i).isCheck()==true && i <= RestaurantList.size())
         {
 
             for (j = i + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
             {
-                if ((RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance())
-                        && (RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice()))
+                if ((RestaurantList.get(j).getScore() > RestaurantList.get(i).getScore())
+                        && (RestaurantList.get(j).getPrice() > RestaurantList.get(i).getPrice())
+                        /*&& RestaurantList.get(j).getDistance() > RestaurantList.get(i).getDistance()*/)
                 {
                     RestaurantList.get(j).setCheck(false);
-                    System.out.println("j : " +  j);
-                    sortres.add(RestaurantList.get(i));
-                }
-
-            }
-            i++;
-            System.out.println("i : " +  i);
-        }
-
-
-
-       /* for (int x = 0; x < RestaurantList.size(); x++)
-        {
-
-            for (j = x + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
-            {
-                if ((RestaurantList.get(j).getDistance() >= RestaurantList.get(x).getDistance())
-                        && (RestaurantList.get(j).getPrice() >= RestaurantList.get(x).getPrice()))
-                {
-                    RestaurantList.get(j).setCheck(false);
-
-                    sortres.addElement(RestaurantList.get(x));
                 }
             }
+            i++;            
+        } 
 
-            System.out.println("x : " +  x);
-        }*/
-
-       // System.out.println("sortres : " +  sortres.size());
-		/*for (j = i + 1; j < K; j++)   // this 3D loop is used for (distance,price,score)
-		{
-		if ((Restaurant[j].distance >= Restaurant[i].distance) && (Restaurant[j].price >= Restaurant[i].price) && (Restaurant[j].score >= Restaurant[i].score))
-		Restaurant[j].check = false;
-		}*/
-
-
-         for (i = 0; i < RestaurantList.size(); i++)
+ 
+        System.out.println("RestaurantList : " + RestaurantList.size());
+        for (i = 0; i < RestaurantList.size(); i++)
         {
-            if (RestaurantList.get(i).isCheck()==true)
+            if (RestaurantList.get(i).isCheck())
             {
-                System.out.println("Distance: " + RestaurantList.get(i).getDistance() + " Score: " + RestaurantList.get(i).getScore()
-                        + " Lat: " + RestaurantList.get(i).getLat() +" Lon: " + RestaurantList.get(i).getLng() + " Price: "
-                        + RestaurantList.get(i).getPrice());
+              
+                sortres.addElement(RestaurantList.get(i));
             }
 
-        }
+        } 
+        
+       RestaurantList.removeAllElements();
+       RestaurantList.setSize(0);
+        
+    	
+        System.out.println("sortres : " + sortres.size());
+        for (i = 0; i < sortres.size(); i++)
+        {
+                System.out.println("Distance: " + sortres.get(i).getDistance() + " Score: " + sortres.get(i).getScore()
+                        + " Lat: " + sortres.get(i).getLat() +" Lon: " + sortres.get(i).getLng() + " Price: "
+                        + sortres.get(i).getPrice());
+
+        } 
+        
+        sortres.removeAllElements();
 
     }
 
