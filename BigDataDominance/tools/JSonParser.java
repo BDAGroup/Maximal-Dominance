@@ -14,13 +14,15 @@ import java.util.Vector;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
+
+import searchQuery.Restaurants;
+import searchQuery.SkylineMain;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import searchQuery.Restaurants;
-import searchQuery.SkylineMain;
 
 
 @SuppressWarnings("deprecation")
@@ -197,7 +199,7 @@ public class JSonParser {
 
 					 //double distance , double lat ,  double lng , int score ,  double price  , boolean chec
 
-					   double dis =  Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
+					   double dis =  tools.Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
 					   Restaurants re = new Restaurants(dis , latitude ,longitude ,  rating , price_level , true );
 
 					   
