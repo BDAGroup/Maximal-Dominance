@@ -1,7 +1,5 @@
 package searchQuery;
 
-import java.util.Vector;
-
 public class Restaurants {
 
     private   double distance;
