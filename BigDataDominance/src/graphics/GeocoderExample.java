@@ -50,7 +50,7 @@ public class GeocoderExample extends MapView {
                 // Getting the associated map object
                 final Map map = getMap();
                 // Setting initial zoom value
-                map.setZoom(12.0);
+                map.setZoom(8.0);
                 // Creating a map options object
                 @SuppressWarnings("deprecation")
 				MapOptions options = new MapOptions(map);

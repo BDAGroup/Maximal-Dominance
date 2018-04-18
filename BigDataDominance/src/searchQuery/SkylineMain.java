@@ -5,13 +5,14 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class SkylineMain {
+public class SkylineMain
+{
 
 
     public static Vector<Restaurants> RestaurantList   = new Vector<Restaurants>();
     public static Vector<Restaurants> sortres   = new Vector<Restaurants>();
 
-
+    public static Restaurants temp;
 
     public static void Init(Restaurants e)
     {
@@ -33,8 +34,9 @@ public class SkylineMain {
                 {
                     //System.out.println("disF: " + RestaurantList.get(i).getDistance());
 
-                    Restaurants temp = RestaurantList.get(i);
+                    //Restaurants temp = RestaurantList.get(i);
 
+                	temp = RestaurantList.get(i);
 
                     RestaurantList.set(i , RestaurantList.get(j));
 
@@ -47,6 +49,7 @@ public class SkylineMain {
 
                 }
             }
+           // System.out.println("check: " + RestaurantList.get(i).isCheck());
         }
 
         return RestaurantList;
@@ -54,11 +57,11 @@ public class SkylineMain {
     }
 
 
-    public static void Skyline(Vector<Restaurants> RestaurantList)
+   public static void Skyline(Vector<Restaurants> RestaurantList)
     {
         int i = 0, j;
 
- /*       while (RestaurantList.get(i).isCheck() && i <= RestaurantList.size())
+       while (RestaurantList.get(i).isCheck() && i <= RestaurantList.size())
         {
 
             for (j = i + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
@@ -67,18 +70,18 @@ public class SkylineMain {
                         && (RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice()))
                 {
                     RestaurantList.get(j).setCheck(false);
-                    System.out.println("j : " +  j);
+                   // System.out.println("j : " +  j);
                     sortres.add(RestaurantList.get(i));
                 }
 
             }
             i++;
-            System.out.println("i : " +  i);
-        }*/
+           // System.out.println("i : " +  i);
+        }
 
 
 
-        for (int x = 0; x < RestaurantList.size(); x++)
+       /* for (int x = 0; x < RestaurantList.size(); x++)
         {
 
             for (j = x + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
@@ -93,13 +96,9 @@ public class SkylineMain {
             }
 
             System.out.println("x : " +  x);
-        }
+        }*/
 
-
-
-
-
-        System.out.println("sortres : " +  sortres.size());
+       // System.out.println("sortres : " +  sortres.size());
 		/*for (j = i + 1; j < K; j++)   // this 3D loop is used for (distance,price,score)
 		{
 		if ((Restaurant[j].distance >= Restaurant[i].distance) && (Restaurant[j].price >= Restaurant[i].price) && (Restaurant[j].score >= Restaurant[i].score))
@@ -107,10 +106,12 @@ public class SkylineMain {
 		}*/
 
 
-        for (i = 0; i < RestaurantList.size(); i++)
+         for (i = 0; i < RestaurantList.size(); i++)
         {
             if (RestaurantList.get(i).isCheck())
             {
+            	sortres.addElement(RestaurantList.get(i));
+            	
                 System.out.println("Distance: " + RestaurantList.get(i).getDistance() + " Score: " + RestaurantList.get(i).getScore()
                         + " Lat: " + RestaurantList.get(i).getLat() +" Lon: " + RestaurantList.get(i).getLng() + " Price: "
                         + RestaurantList.get(i).getPrice());
@@ -118,14 +119,6 @@ public class SkylineMain {
 
         }
 
-
-
-
     }
-
-
-
-
-
 
 }
