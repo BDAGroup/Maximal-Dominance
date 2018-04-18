@@ -4,13 +4,13 @@ import java.util.Vector;
 
 public class Restaurants {
 
-    private   double distance = 0.0 ;
-    private   double lat  = 0.0;
-    private   double lng = 0.0;
-    private   double score = -1.0;
-    private   double price = 0.0;
-    private   boolean check = true;
-    private   int Kres = -1;
+    private   double distance;
+    private   double lat;
+    private   double lng;
+    private   double score;
+    private   double price;
+    private   boolean check =true;
+    private   int Kres;
 
     public Restaurants(double distance , double lat ,  double lng , double score ,  double price  , boolean check)
     {
