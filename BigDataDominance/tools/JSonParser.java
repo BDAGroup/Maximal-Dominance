@@ -215,7 +215,7 @@ public class JSonParser {
 	        		}
 	        	   
 	           }
-	           Skymain.Skyline(Skymain.SortRestaurant());
+	           Vector<Restaurants> sorted = Skymain.Skyline(Skymain.SortRestaurant());
 	           
 	           return retreiveData ;
 		}

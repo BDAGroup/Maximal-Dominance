@@ -49,16 +49,16 @@ public class MainGraphics extends javax.swing.JFrame {
      */
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private   JButton btn_search;
+    private  JButton btn_search;
     private  JComboBox<String> cbo_cuisine;
     private  JComboBox<String> cbo_sortby;
     private  JScrollPane jScrollPane1;
     private  JSeparator jSeparator1;
     private  JSeparator jSeparator2;
-    private JLabel lbl_cuisine;
-    private JLabel lbl_cuisine1;
+    private  JLabel lbl_cuisine;
+    private  JLabel lbl_cuisine1;
     private  JLabel lbl_header;
-    private   JLabel lbl_result;
+    private  JLabel lbl_result;
     private  JLabel lbl_search;
     private  JLabel lbl_sortby;
     private  JList<String> lst_restaurants;
@@ -67,6 +67,8 @@ public class MainGraphics extends javax.swing.JFrame {
     private  JPanel pnl_results;
     private  JPanel pnl_search;
     private JTextField txt_searchrange;
+    public  static MainGraphics frame;
+    
     // End of variables declaration//GEN-END:variables
    
     private static GeocoderExample mapView = new GeocoderExample();
@@ -75,7 +77,18 @@ public class MainGraphics extends javax.swing.JFrame {
     public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
 	public static Vector<Double> restuarantScore =  new Vector<Double>();
 	
- 
+	public static String[] arsg  = null;
+	
+	public static void setStr(String[] args)
+	{
+		arsg = args;
+	}
+	
+	public static String[] getString()
+	{
+		return arsg;
+	}
+	
 
 	public MainGraphics() {
         initComponents();
@@ -123,7 +136,7 @@ public class MainGraphics extends javax.swing.JFrame {
         lbl_header.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         lbl_header.setForeground(new java.awt.Color(0, 102, 204));
         lbl_header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_header.setText("Top Dominating Restaurants Finder");
+        lbl_header.setText("Top K Restaurants");
 
         javax.swing.GroupLayout pnl_headerLayout = new  GroupLayout(pnl_header);
         pnl_header.setLayout(pnl_headerLayout);
@@ -392,8 +405,10 @@ public class MainGraphics extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_formWindowStateChanged
 
-    private static MainGraphics mainFrame;
+    public static MainGraphics mainFrame;
     public static void main(String args[]) {
+    	
+    	setStr(args);
  
   	  PatternTheme pat =  new PatternTheme();
     	try {
@@ -442,11 +457,10 @@ public class MainGraphics extends javax.swing.JFrame {
 		               
 		                mainFrame.txt_searchrange.setText("4");
 		                mainFrame.cbo_cuisine.setSelectedIndex(3);
-		                
-		                
+		          
 		                MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
 		                MainGraphics.pnl_map.validate();
-		                MainGraphics.pnl_map.setVisible(true);
+		                //MainGraphics.pnl_map.setVisible(true);
 		                mainFrame.setResizable(true);
 		                mainFrame.setVisible(true);
 		               
@@ -494,10 +508,9 @@ public class MainGraphics extends javax.swing.JFrame {
 				
     	}
     	
+    
  
     }
-    
-    
-    
+ 
 
 }
