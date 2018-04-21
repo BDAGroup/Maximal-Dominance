@@ -3,9 +3,8 @@ package searchQuery;
  
 import java.util.Vector;
 
-import graphics.DrawGraph;
+//import graphics.DrawGraph;
 import graphics.MainGraphics;
-
 
 public class SkylineMain
 {
@@ -92,12 +91,12 @@ public class SkylineMain
        {
     	   System.out.println("RestaurantList " + RestaurantList.size());
     	   System.out.println("Dis " + sortres.size());
-       DrawGraph.setxAxis("Score");
+/*       DrawGraph.setxAxis("Score");
        DrawGraph.setyAxis("Disatnce");
        DrawGraph.setTotalRes(RestaurantList);
        DrawGraph.setSkylineRes(sortres);
        
-       DrawGraph.LaunchChart();
+       DrawGraph.LaunchChart();*/
        
        }
        
