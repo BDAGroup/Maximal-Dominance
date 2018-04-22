@@ -320,7 +320,12 @@ public class MainGraphics extends javax.swing.JFrame {
         lbl_sortby.setText("Sort by");
 
         cbo_sortby.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbo_sortby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Top Dominating Score", "Dominating Price", "Dominating Distance", "Dominating Ratings" }));
+        cbo_sortby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an option ...",
+        		"Top Dominating Price-Distance-Score",
+        		"Top Dominating Price-Distance", 
+        		"Top Dominating Price-Score",
+        		"Top Dominating Distance-Score",
+        		}));
 
         javax.swing.GroupLayout pnl_resultsLayout = new javax.swing.GroupLayout(pnl_results);
         pnl_results.setLayout(pnl_resultsLayout);
@@ -500,6 +505,8 @@ public class MainGraphics extends javax.swing.JFrame {
 					 	 Double[] latlng = restuarantlatlng.get(i);
 					     mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
 	                }
+				 
+				 
 				
 			} catch (ParseException | IOException e) {
 				// TODO Auto-generated catch block

@@ -31,10 +31,11 @@ import searchQuery.Restaurants;
  *
  */
 public class XYLineChartExample extends JFrame {
+	
+	private static Vector<Restaurants> ResV;
 
 	public XYLineChartExample(String XAxis , String YAxis , Vector<Restaurants> Res , Vector<Restaurants> KRes) {
 		super("XY Line Chart Example with JFreechart");
-		
 		JPanel chartPanel = createChartPanel(XAxis , YAxis , Res , KRes);
 		add(chartPanel, BorderLayout.CENTER);
 		setSize(640, 480);
@@ -51,10 +52,16 @@ public class XYLineChartExample extends JFrame {
 		boolean createURL = false;
 		boolean createTooltip = true;
 		
-		JFreeChart chart = ChartFactory.createXYLineChart(chartTitle, 
-				XAxis, YAxis, dataset, 
- 				PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);
-		customizeChart(chart);
+	/*	JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, 
+				, dataset, 
+ 				PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);*/
+		//
+		
+		 JFreeChart chart = ChartFactory.createScatterPlot(
+				 chartTitle, 
+				 XAxis, YAxis, dataset , PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);
+		 customizeChart(chart);
+		
 		
 	/*	// saves the chart as an image files
 		File imageFile = new File("XYLineChart.png");
@@ -73,19 +80,18 @@ public class XYLineChartExample extends JFrame {
 	private XYDataset createDataset(Vector<Restaurants> Res , Vector<Restaurants> KRes) {
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		
-		
 		XYSeries series1 = new XYSeries("Restaurants");
 		XYSeries series2 = new XYSeries("K-Restaurants");
 	
-		
 		for(int i = 0 ; i < Res.size() ; i++)
 		{
-			series1.add(Res.get(i).getDistance(), Res.get(i).getScore());
+			series1.add( Res.get(i).getDistance()  ,Res.get(i).getScore());
 		}
 		
-		for(int i = 0 ; i < KRes.size() ; i++)
+		
+		for(int k = 0 ; k < KRes.size() ; k++)
 		{
-			series2.add(KRes.get(i).getDistance(), KRes.get(i).getScore());
+			series2.add( KRes.get(k).getDistance()  , KRes.get(k).getScore());
 		}
 		
 		dataset.addSeries(series1);
@@ -105,8 +111,8 @@ public class XYLineChartExample extends JFrame {
 		renderer.setSeriesPaint(2, Color.YELLOW);
 
 		// sets thickness for series (using strokes)
-		renderer.setSeriesStroke(0, new BasicStroke(4.0f));
-		renderer.setSeriesStroke(1, new BasicStroke(3.0f));
+		//renderer.setSeriesStroke(0, new BasicStroke(4.0f));
+		//renderer.setSeriesStroke(1, new BasicStroke(3.0f));
 		renderer.setSeriesStroke(2, new BasicStroke(2.0f));
 		
 		// sets paint color for plot outlines
@@ -114,7 +120,7 @@ public class XYLineChartExample extends JFrame {
 		plot.setOutlineStroke(new BasicStroke(2.0f));
 		
 		// sets renderer for lines
-		plot.setRenderer(renderer);
+		// plot.setRenderer(renderer);
 		
 		// sets plot background
 		plot.setBackgroundPaint(Color.DARK_GRAY);
@@ -128,12 +134,23 @@ public class XYLineChartExample extends JFrame {
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void DrawChart(String XAxis , String YAxis ,  Vector<Restaurants> Res , Vector<Restaurants> KRes )
+	{
+		 System.out.println("Res " + Res.size());
+  	   System.out.println("KRes " + KRes.size());
+  	   
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				//new XYLineChartExample().setVisible(true);
+	 
+				 System.out.println("ResT " + Res.size());
+			  	 System.out.println("KResT " + KRes.size());
+			  	   
+				XYLineChartExample sline =  new XYLineChartExample(  XAxis ,   YAxis ,    Res , KRes );
+				sline.setVisible(true);
 			}
-		});
+		});	
 	}
+	
+
 }

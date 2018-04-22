@@ -244,7 +244,7 @@ public class JSonParser {
         			+"keyword="+cuisine+""
         					+ "&key="+key+"";
                
-               System.out.println("Url " + url);
+              // System.out.println("Url " + url);
                
                HttpPost post = new HttpPost(url);
                HttpResponse response = client.execute(post);
