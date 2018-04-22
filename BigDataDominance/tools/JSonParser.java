@@ -155,7 +155,7 @@ public class JSonParser {
 	{
 		try{
 				Skymain = new SkylineMain();
-			  JSONObject obj_JSONObject = new JSONObject(JsonResponse.toString());
+			   JSONObject obj_JSONObject = new JSONObject(JsonResponse.toString());
 	           JSONArray results = obj_JSONObject.getJSONArray("results");
 	           retreiveData =  new HashMap<Integer , Vector<Object>>();
 	           for (int i = 0 ; i < results.length() ; i++)
@@ -187,25 +187,27 @@ public class JSonParser {
 	                data.add(open);
 	                data.add(price_level);
 	                data.add(rating);
+	                
 	                resVec.addElement(name);
+	                
 	                resPID.addElement(place_id);
+	                
 	                retreiveData.put(i, data);
+	                
 	                restuarantlatlng.addElement(geo);
 	                restuarantPrice.addElement(price_level);
 	                restuarantScore.addElement(rating);
+	                
 	                setRestuarantlatlng(restuarantlatlng);
 	                setRestuarantPrice(restuarantPrice);
 	                setRestuarantScore(restuarantScore);
-
-					 //double distance , double lat ,  double lng , int score ,  double price  , boolean chec
+ 
 
 					   double dis =  tools.Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
 					   Restaurants re = new Restaurants(dis , latitude ,longitude ,  rating , price_level , true );
-
-					   
+ 
 					   Skymain.Init(re);
-
-					   //SkylineMain.SortRestaurant();
+ 
  
 	        	   }
 

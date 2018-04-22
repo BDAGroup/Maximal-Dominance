@@ -50,7 +50,12 @@ public class GeocoderExample extends MapView {
                 // Getting the associated map object
                 final Map map = getMap();
                 // Setting initial zoom value
-                map.setZoom(8.0);
+                map.setZoom(14.0);
+                
+                LatLng location = new LatLng(41.1536674 , -81.3578859);
+                
+                map.setCenter(location);
+
                 // Creating a map options object
                 @SuppressWarnings("deprecation")
 				MapOptions options = new MapOptions(map);
@@ -63,7 +68,7 @@ public class GeocoderExample extends MapView {
                 // Setting map options
                 map.setOptions(options);
 
-                performGeocode(INITIAL_LOCATION);
+               performGeocode(INITIAL_LOCATION);
             }
         });
     }
@@ -184,13 +189,16 @@ public class GeocoderExample extends MapView {
                     GeocoderResult result = results[0];
         
                     LatLng location = result.getGeometry().getLocation();
+  
                     // Setting the map center to result location
-                    map.setCenter(location);
+
                     // Creating a marker object
                     Marker marker = new Marker(map);
                     // Setting position of the marker to the result location
                     marker.setPosition(location);
                     
+                   
+                    map.setCenter( marker.getPosition());
  
                     // Creating an information window
                     InfoWindow infoWindow = new InfoWindow(map);
@@ -215,7 +223,8 @@ public class GeocoderExample extends MapView {
     	try{
         final Map map = getMap();
         // Creating a geocode request
-        GeocoderRequest request = new GeocoderRequest(map);
+        @SuppressWarnings("deprecation")
+		GeocoderRequest request = new GeocoderRequest(map);
         // Setting address to the geocode request
         LatLng location = new LatLng( lat , lon);
         
@@ -242,6 +251,7 @@ public class GeocoderExample extends MapView {
                     // Putting the address and location to the content of the information window
                      String dis  = Tools.distance(41.1536674 , -81.3578859, lat, lon) + " mi";
   
+                     System.out.println(Name + " | " + dis);
                     infoWindow.setContent("<b>" + Name+ "</b><br> Dis: " + dis + "</b><br> Score: " + Score + "</b><br>Price: " + Tools.GetChar(Price));
                     // Moving the information window to the result location
                     infoWindow.setPosition(location);

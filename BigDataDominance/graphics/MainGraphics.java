@@ -23,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -122,6 +123,7 @@ public class MainGraphics extends javax.swing.JFrame {
         cbo_sortby = new  JComboBox<>();
         pnl_map = new  JPanel();
 
+        setExtendedState(MAXIMIZED_BOTH);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(150, 50));
         setName("Main Page"); // NOI18N
@@ -248,20 +250,25 @@ public class MainGraphics extends javax.swing.JFrame {
 						// TODO Auto-generated method stub+
 						
 						 mapView.removeAll();
-						 mapView = new GeocoderExample();			
+						 
+						 mapView = new GeocoderExample();
+						 
 						 lst_restaurants.removeAll();
+						 
 						 SearchAction();
 						
-				         mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
-				       
-				         mainFrame.repaint();
+				         mainFrame.lbl_result.setText(JSonParser.getResVec().size() + " Restuarants Found !!");
+		 
 				         MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
+				         
 			             MainGraphics.pnl_map.validate();
+			             
 			             MainGraphics.pnl_map.setVisible(true);
+			             
 			             mainFrame.add(MainGraphics.pnl_map);
 			             mainFrame.setVisible(true);
 			           
-			            // mainFrame.repaint();
+			             mainFrame.repaint();
 				  		 
 					}
         	
@@ -271,49 +278,45 @@ public class MainGraphics extends javax.swing.JFrame {
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         lbl_result.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_result.setText("Results");
-        lst_restaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        Vector<String> vec  = restuarantName;
-        
-        Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
-        Vector<Integer> price =   JSonParser.getRestuarantPrice();
-        Vector<Double> Score =   JSonParser.getRestuarantScore();
-      
+        lst_restaurants.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+ 
         lst_restaurants.setModel(new AbstractListModel<String>() 
-        {
-            /**
-			 * 
-			 */
+        { 
+        	   Vector<String> vec  = JSonParser.getResVec();
+               Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
+               Vector<Integer> price =   JSonParser.getRestuarantPrice();
+               Vector<Double> Score =   JSonParser.getRestuarantScore();
 			private static final long serialVersionUID = 4267073180687045665L;
-			String[] strings = { "1. Restaurant 1", "2. Restaurant 2", "3. Restaurant 3", "4. Restaurant 4", "5. Restaurant 5" };
-       
+		 
             public int getSize() { 
-           
+            	 
+            	if (vec.size() > 0)
               return vec.size();
+            	
+            	else return 40;
             }
             
             public String getElementAt(int i)
             { 
-            	if (vec.size() == 0)
-            	return strings[i]; 
-            	
-            	else
+               
+         		if (vec.size() > 0)
             		{
- 
-            		if (lltVec.size() > 0)
-            		{
-            			return vec.get(i).toString() + " [" + Tools.distance(41.1536674 , -81.3578859 , lltVec.get(i)[0], lltVec.get(i)[1]) + " mi ] [ Score " +Score.get(i)+"| Price :" + 													Tools.GetChar(price.get(i))+"]";
-            		}
-            		
-            		
-            		else {
-            			  return vec.get(i).toString();
+         				String info  = vec.get(i).toString() + 
+         						" [" + Tools.distance(41.1536674 , -81.3578859 , 
+         								lltVec.get(i)[0], lltVec.get(i)[1]) 
+         							+ " mi ] [ Score " +Score.get(i)+"| Price :" + Tools.GetChar(price.get(i))+"]";
+         	 
+            			return info;
             		}
 
-            		}
-            	
+            	return " ";
+            	 
+
             }
         });
+        
+        
+        
         jScrollPane1.setViewportView(lst_restaurants);
 
         lbl_sortby.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -438,35 +441,36 @@ public class MainGraphics extends javax.swing.JFrame {
             public void run() {
                 
                 try {
-					String str = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , "Mexican" , JSonParser.KEy , 4);
-					
-					
-					JSonParser.getData(str);		
-					
-					restuarantName  = JSonParser.getResVec();
-			        mainFrame = new MainGraphics();
-			        MainGraphics.pnl_map.removeAll();
-  
-		            restuarantlatlng =  JSonParser.getRestuarantlatlng();
-		            restuarantPrice  = JSonParser.getRestuarantPrice();
-		            restuarantScore  = JSonParser.getRestuarantScore();
+					//String str = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , "American" , JSonParser.KEy , 2);
  
-		            mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
-		            
-		            
+					//JSonParser.getData(str);		
+					
+                	//restuarantName  = JSonParser.getResVec();
+		 
+			        mainFrame = new MainGraphics();
+			        
+			        MainGraphics.pnl_map.removeAll();
+		           // restuarantlatlng =  JSonParser.getRestuarantlatlng();
+		           // restuarantPrice  = JSonParser.getRestuarantPrice();
+		           // restuarantScore  = JSonParser.getRestuarantScore();
+ 
+		      /*      mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
+
 		                for (int i = 0 ; i < restuarantName.size() ; i++ )
 		                {
 		                	Double[] latlng = restuarantlatlng.get(i);
-		                	mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
-		                }
+		                	//mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
+		                }*/
 		               
-		                mainFrame.txt_searchrange.setText("4");
-		                mainFrame.cbo_cuisine.setSelectedIndex(3);
+		                mainFrame.txt_searchrange.setText("0");
+		                mainFrame.cbo_cuisine.setSelectedIndex(0);
 		          
 		                MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
 		                MainGraphics.pnl_map.validate();
-		                //MainGraphics.pnl_map.setVisible(true);
+		                
+		             
 		                mainFrame.setResizable(true);
+		            
 		                mainFrame.setVisible(true);
 		               
 				} catch (Exception e) {

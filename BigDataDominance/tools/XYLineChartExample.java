@@ -135,17 +135,12 @@ public class XYLineChartExample extends JFrame {
 	}
 	
 	public static void DrawChart(String XAxis , String YAxis ,  Vector<Restaurants> Res , Vector<Restaurants> KRes )
-	{
-		 System.out.println("Res " + Res.size());
-  	   System.out.println("KRes " + KRes.size());
+	{ 
   	   
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-	 
-				 System.out.println("ResT " + Res.size());
-			  	 System.out.println("KResT " + KRes.size());
-			  	   
+ 
 				XYLineChartExample sline =  new XYLineChartExample(  XAxis ,   YAxis ,    Res , KRes );
 				sline.setVisible(true);
 			}
