@@ -9,6 +9,7 @@ public class Restaurants {
     private   double price;
     private   boolean check =true;
     private   int Kres;
+    private   String Name;
 
     public Restaurants(double distance , double lat ,  double lng , double score ,  double price  , boolean check)
     {
@@ -18,8 +19,18 @@ public class Restaurants {
         this.score  = score;
         this.price  = price;
         this.check  = check;
+        
     }
-
+    
+    public void setName(String name)
+    {
+    	this.Name = name;
+    }
+    
+    public String getName()
+    {
+    	return this.Name;
+    }
 
     public double getDistance() {
         return distance;

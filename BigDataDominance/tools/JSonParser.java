@@ -36,6 +36,8 @@ public class JSonParser {
     public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
 	public static Vector<Double> restuarantScore =  new Vector<Double>();
 	public static SkylineMain Skymain ;
+	private static Vector<Restaurants> TRes;
+	private static Vector<Restaurants> Kres;
 
 	/**
 	 * @return the restuarantPrice
@@ -150,11 +152,10 @@ public class JSonParser {
         
         return null;
 	}*/
- 	
-	public static HashMap<Integer , Vector<Object>> getData (String JsonResponse )
+	public static Vector<Restaurants> getData (String JsonResponse )
 	{
 		try{
-				Skymain = new SkylineMain();
+			   Skymain = new SkylineMain();
 			   JSONObject obj_JSONObject = new JSONObject(JsonResponse.toString());
 	           JSONArray results = obj_JSONObject.getJSONArray("results");
 	           retreiveData =  new HashMap<Integer , Vector<Object>>();
@@ -217,9 +218,99 @@ public class JSonParser {
 	        		}
 	        	   
 	           }
-	           Vector<Restaurants> sorted = Skymain.Skyline(Skymain.SortRestaurant());
+	        
+	           Vector<Restaurants> KRestaurants = Skymain.Skyline(Skymain.SortRestaurant());
 	           
-	           return retreiveData ;
+	           setTRes(Skymain.getTotalRestaurant());
+	           setKres(Skymain.getSortres());
+	           
+	           return KRestaurants ;
+		}
+		catch(Exception e)
+		{
+			
+			
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
+	public static Vector<Restaurants> getData (String JsonResponse, int type )
+	{
+		try{
+			   Skymain = new SkylineMain();
+			   JSONObject obj_JSONObject = new JSONObject(JsonResponse.toString());
+	           JSONArray results = obj_JSONObject.getJSONArray("results");
+	           retreiveData =  new HashMap<Integer , Vector<Object>>();
+	           for (int i = 0 ; i < results.length() ; i++)
+	           {
+	        	   try{
+	        	    JSONObject jsonObject2 = (JSONObject)results.get(i);
+	                JSONObject geometry = (JSONObject)jsonObject2.get("geometry");
+	                JSONObject location = (JSONObject) geometry.get("location");
+	                
+	              
+	                Double latitude = (Double)location.get("lat");
+	                Double longitude = (Double)location.get("lng");
+	                
+	                String name = (String)jsonObject2.get("name").toString();
+	                
+	                String place_id = (String)jsonObject2.get("place_id").toString();
+	                
+	                JSONObject opening_hours = (JSONObject)jsonObject2.get("opening_hours");
+	                
+	                Boolean open = (Boolean)opening_hours.get("open_now");
+	                int price_level = (int)jsonObject2.get("price_level");
+	                double rating = (double)jsonObject2.get("rating");
+	                Vector<Object> data = new Vector<Object>();
+	                data.add(name);
+	                Double[] geo  =  new Double[2];
+	                geo[0] = latitude;
+	                geo[1] = longitude;
+	                data.add(geo);
+	                data.add(open);
+	                data.add(price_level);
+	                data.add(rating);
+	                
+	                resVec.addElement(name);
+	                
+	                resPID.addElement(place_id);
+	                
+	                retreiveData.put(i, data);
+	                
+	                restuarantlatlng.addElement(geo);
+	                restuarantPrice.addElement(price_level);
+	                restuarantScore.addElement(rating);
+	                
+	                setRestuarantlatlng(restuarantlatlng);
+	                setRestuarantPrice(restuarantPrice);
+	                setRestuarantScore(restuarantScore);
+ 
+
+					   double dis =  tools.Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
+					   Restaurants re = new Restaurants(dis , latitude ,longitude ,  rating , price_level , true );
+					   re.setName(name);
+					   Skymain.Init(re);
+ 
+ 
+	        	   }
+
+	        	   catch(Exception e)
+	        		{
+	        			
+	        		}
+	        	   
+	           }
+	        
+	           Vector<Restaurants> KRestaurants = Skymain.Skyline(Skymain.SortRestaurant(), type);
+	           
+	           setTRes(Skymain.getTotalRestaurant());
+	           setKres(Skymain.getSortres());
+	           
+	           return KRestaurants ;
 		}
 		catch(Exception e)
 		{
@@ -272,5 +363,37 @@ public class JSonParser {
  
           
        }
+
+
+	/**
+	 * @return the tRes
+	 */
+	public static Vector<Restaurants> getTRes() {
+		return TRes;
+	}
+
+
+	/**
+	 * @param tRes the tRes to set
+	 */
+	public static void setTRes(Vector<Restaurants> tRes) {
+		TRes = tRes;
+	}
+
+
+	/**
+	 * @return the kres
+	 */
+	public static Vector<Restaurants> getKres() {
+		return Kres;
+	}
+
+
+	/**
+	 * @param kres the kres to set
+	 */
+	public static void setKres(Vector<Restaurants> kres) {
+		Kres = kres;
+	}
  
 }

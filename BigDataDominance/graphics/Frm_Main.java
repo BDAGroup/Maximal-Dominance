@@ -6,6 +6,7 @@
 package graphics;
 
 import graphics.GeocoderExample;
+import searchQuery.Restaurants;
 import tools.JSonParser;
 
 import java.awt.BorderLayout;
@@ -436,7 +437,10 @@ public class Frm_Main extends javax.swing.JFrame {
     	{
 			try {
 				String str  = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , cuisine , JSonParser.KEy , radius);
-				JSonParser.getData(str);
+				
+				
+				//Vector<Restaurants> Tres  = JSonParser.getData(str);
+				 
 				restuarantName  = JSonParser.getResVec();
 				 for (int i = 0 ; i < restuarantName.size() ; i++ )
 	                {

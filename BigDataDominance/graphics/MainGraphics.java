@@ -6,9 +6,11 @@
 package graphics;
 
 import graphics.GeocoderExample;
+import searchQuery.Restaurants;
 import searchQuery.SkylineMain;
 import tools.JSonParser;
 import tools.Tools;
+import tools.XYLineChartExample;
 
 import java.awt.BorderLayout;
 import java.awt.Frame;
@@ -23,6 +25,7 @@ import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -77,6 +80,8 @@ public class MainGraphics extends javax.swing.JFrame {
     public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
 	public static Vector<Double> restuarantScore =  new Vector<Double>();
 	
+	public static Vector<Restaurants> kRes;
+	
 	public static String[] arsg  = null;
 	
 	public static void setStr(String[] args)
@@ -124,7 +129,7 @@ public class MainGraphics extends javax.swing.JFrame {
         btn_showAnalysis = new javax.swing.JButton();
         pnl_map = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         setLocation(new java.awt.Point(150, 50));
         setName("Main Page"); // NOI18N
@@ -182,7 +187,19 @@ public class MainGraphics extends javax.swing.JFrame {
         });
 
         cbo_cuisine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ...", "American", "Italian", "Mexican", "Chinese", "Indian", "Nepalese" }));
+        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ...", 
+        		"American", 
+        		"Italian", 
+        		"Mexican",
+        		"Japanese", 
+        		"Chinese", 
+        		"Indian", 
+        		"Nepalese", 
+        		"Thai" ,
+        		"Mediterranean",
+        		"Turkish", 
+        		"Greek", 
+        		"Caribbean"}));
 
         btn_search.setBackground(new java.awt.Color(0, 102, 204));
         btn_search.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -193,8 +210,46 @@ public class MainGraphics extends javax.swing.JFrame {
                 btn_searchActionPerformed(evt);
             }
         });
+ 
+        lst_allrestaurants.setModel(new AbstractListModel<String>() 
+        { 
+        	   Vector<String> vec  = JSonParser.getResVec();
+               Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
+               Vector<Integer> price =   JSonParser.getRestuarantPrice();
+               Vector<Double> Score =   JSonParser.getRestuarantScore();
+			private static final long serialVersionUID = 4267073180687045665L;
+		 
+            public int getSize() { 
+            	 
+            	if (vec.size() > 0)
+              return vec.size();
+            	
+            	else return 40;
+            }
+            
+            public String getElementAt(int i)
+            { 
+               
+         		if (vec.size() > 0)
+            		{
+         				String info  = vec.get(i).toString() + 
+         						" [" + Tools.distance(41.1536674 , -81.3578859 , 
+         								lltVec.get(i)[0], lltVec.get(i)[1]) 
+         							+ " mi ] [ Score " +Score.get(i)+"| Price :" + Tools.GetChar(price.get(i))+"]";
+         	 
+            			return info;
+            		}
 
-        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+            	return " ";
+            	 
+
+            }
+        });
+        
+        
+        
+
+        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jScrollPane2.setViewportView(lst_allrestaurants);
 
         lbl_resultsFound.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -258,13 +313,56 @@ public class MainGraphics extends javax.swing.JFrame {
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         lst_sortedrestaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        
+        
+        lst_sortedrestaurants.setModel(new AbstractListModel<String>() 
+        { 
+     	   Vector<String> vec  = JSonParser.getResVec();
+           Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
+           Vector<Integer> price =   JSonParser.getRestuarantPrice();
+           Vector<Double> Score =   JSonParser.getRestuarantScore();
+		private static final long serialVersionUID = 4267073180687045665L;
+	 
+        public int getSize() { 
+        	 
+        	if (vec.size() > 0)
+          return vec.size();
+        	
+        	else return 40;
+        }
+        
+        public String getElementAt(int i)
+        { 
+           
+     		if (vec.size() > 0)
+        		{
+     				String info  = vec.get(i).toString() + 
+     						" [" + Tools.distance(41.1536674 , -81.3578859 , 
+     								lltVec.get(i)[0], lltVec.get(i)[1]) 
+     							+ " mi ] [ Score " +Score.get(i)+"| Price :" + Tools.GetChar(price.get(i))+"]";
+     	 
+        			return info;
+        		}
+
+        	return " ";
+        	 
+
+        }
+    });
+        
+        
+        
         jScrollPane1.setViewportView(lst_sortedrestaurants);
 
         lbl_sortby.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_sortby.setText("Sort by");
 
         cbo_sortby.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbo_sortby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an option ...", "Top Dominating Distance-Price-Score", "Dominating Disstance-Price", "Dominating Distance-Score", "Dominating Price-Score" }));
+        cbo_sortby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an option ..."
+        		, "Top Dominating Distance-Price-Score"
+        		, "Dominating Distance-Price"
+        		, "Dominating Distance-Score"
+        		, "Dominating Price-Score" }));
 
         btn_showAnalysis.setBackground(new java.awt.Color(0, 102, 204));
         btn_showAnalysis.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -273,6 +371,37 @@ public class MainGraphics extends javax.swing.JFrame {
         btn_showAnalysis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_showAnalysisActionPerformed(evt);
+                int str  =  cbo_sortby.getSelectedIndex();
+                int i = 0;
+                switch(str)
+                {
+                case 0:
+                	i = 0;
+                break;
+                
+                case 1:
+                	i = 1;
+                break;
+                
+                case 2:
+                	i = 2;
+                	break;
+                	
+                case 3:
+                	i = 3;
+                	break;
+                	
+                case 4:
+                	i = 4;
+                	break;
+                	
+                }
+              
+                
+                 XYLineChartExample.DrawChart("Score", "Distance", JSonParser.getTRes(),  JSonParser.getKres() , i);
+                
+      
+                
             }
         });
 
@@ -357,9 +486,13 @@ public class MainGraphics extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_formWindowStateChanged
 
-    private void btn_showAnalysisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showAnalysisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_showAnalysisActionPerformed
+    private void btn_showAnalysisActionPerformed(java.awt.event.ActionEvent evt) { 
+    	
+    	
+    	
+    	
+       
+    } 
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         // TODO add your handling code here:
@@ -383,9 +516,9 @@ public class MainGraphics extends javax.swing.JFrame {
     public static MainGraphics mainFrame;
     public static void main(String args[]) {
     	
-    	setStr(args);
+    	   setStr(args);
  
-  	  PatternTheme pat =  new PatternTheme();
+  	       PatternTheme pat =  new PatternTheme();
     	try {
     		UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel"); 	
     		 	pat.setUpColor();	
@@ -408,30 +541,29 @@ public class MainGraphics extends javax.swing.JFrame {
             public void run() {
                 
                 try {
-					String str = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , "Mexican" , JSonParser.KEy , 4);
-					
-					
-					JSonParser.getData(str);		
-					
-					restuarantName  = JSonParser.getResVec();
-			        mainFrame = new MainGraphics();
-			        MainGraphics.pnl_map.removeAll();
-  
-		            restuarantlatlng =  JSonParser.getRestuarantlatlng();
-		            restuarantPrice  = JSonParser.getRestuarantPrice();
-		            restuarantScore  = JSonParser.getRestuarantScore();
+					//String str = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , "American" , JSonParser.KEy , 2);
  
-		            mainFrame.lbl_resultsFound.setText(restuarantName.size() + " Restuarants Found !!");
-		            
-		            
+					//JSonParser.getData(str);		
+					
+                	//restuarantName  = JSonParser.getResVec();
+		 
+			        mainFrame = new MainGraphics();
+			        
+			        MainGraphics.pnl_map.removeAll();
+		           // restuarantlatlng =  JSonParser.getRestuarantlatlng();
+		           // restuarantPrice  = JSonParser.getRestuarantPrice();
+		           // restuarantScore  = JSonParser.getRestuarantScore();
+ 
+		      /*      mainFrame.lbl_result.setText(restuarantName.size() + " Restuarants Found !!");
+
 		                for (int i = 0 ; i < restuarantName.size() ; i++ )
 		                {
 		                	Double[] latlng = restuarantlatlng.get(i);
-		                	mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
-		                }
+		                	//mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
+		                }*/
 		               
-		                mainFrame.txt_searchrange.setText("4");
-		                mainFrame.cbo_cuisine.setSelectedIndex(3);
+		                mainFrame.txt_searchrange.setText("0");
+		                mainFrame.cbo_cuisine.setSelectedIndex(0);
 		          
 		                MainGraphics.pnl_map.add(mapView, BorderLayout.CENTER);
 		                MainGraphics.pnl_map.validate();
@@ -464,16 +596,39 @@ public class MainGraphics extends javax.swing.JFrame {
     	{
 			try {
 				 String str  = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , cuisine , JSonParser.KEy , radius);
-				 JSonParser.getData(str);
+				 
+				 
+				 int index  =  cbo_sortby.getSelectedIndex();
+				 
+				 if (index != 0)
+				 {
+					 Vector<Restaurants> kRes = JSonParser.getData(str, index);
+					 
+				
+				 }
+				 
+				 else {
+					 Vector<Restaurants> kRes = JSonParser.getData(str);
+				 }
+ 
+				 setkRes(kRes);
+				 
+				 Vector<Restaurants> TRes = JSonParser.getTRes();
+			 
+				 
 				 restuarantName   = JSonParser.getResVec();
+				 
 				 restuarantlatlng =  JSonParser.getRestuarantlatlng();
+				 
 				 restuarantPrice  = JSonParser.getRestuarantPrice();
+				 
 				 restuarantScore  = JSonParser.getRestuarantScore();
  
 				 for (int i = 0 ; i < restuarantName.size() ; i++ )
 	                {
 					 	 Double[] latlng = restuarantlatlng.get(i);
-					     mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
+					    
+					 	 mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
 	                }
 				 
 				 
@@ -488,6 +643,20 @@ public class MainGraphics extends javax.swing.JFrame {
     
  
     }
+
+	/**
+	 * @return the kRes
+	 */
+	public static Vector<Restaurants> getkRes() {
+		return kRes;
+	}
+
+	/**
+	 * @param kRes the kRes to set
+	 */
+	public static void setkRes(Vector<Restaurants> kRes) {
+		MainGraphics.kRes = kRes;
+	}
  
 
 }
