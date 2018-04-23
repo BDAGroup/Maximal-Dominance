@@ -133,7 +133,7 @@ public class MainGraphics extends javax.swing.JFrame {
         btn_showAnalysis = new javax.swing.JButton();
         pnl_map = new javax.swing.JPanel();
 
-        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         setLocation(new java.awt.Point(150, 50));
         setName("Main Page"); // NOI18N
@@ -153,7 +153,7 @@ public class MainGraphics extends javax.swing.JFrame {
         lbl_header.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         lbl_header.setForeground(new java.awt.Color(0, 102, 204));
         lbl_header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        //lbl_header.setText(title);
+        lbl_header.setText("Restaurants Recommendation System");
 
         javax.swing.GroupLayout pnl_headerLayout = new javax.swing.GroupLayout(pnl_header);
         pnl_header.setLayout(pnl_headerLayout);
@@ -236,10 +236,10 @@ public class MainGraphics extends javax.swing.JFrame {
                
          		if (vec.size() > 0)
             		{
-         				String info  = vec.get(i).toString() + 
-         						" [" + Tools.distance(41.1536674 , -81.3578859 , 
+         				String info  = (i+1) + ". "+vec.get(i).toString() +
+         						" \n[" + Tools.distance(41.1536674 , -81.3578859 ,
          								lltVec.get(i)[0], lltVec.get(i)[1]) 
-         							+ " mi ] [ Score " +Score.get(i)+"| Price :" + Tools.GetChar(price.get(i))+"]";
+         							+ " mi | Score " +Score.get(i)+" | Price :" + Tools.GetChar(price.get(i))+"]";
          	 
             			return info;
             		}
@@ -253,11 +253,11 @@ public class MainGraphics extends javax.swing.JFrame {
         
         
 
-        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jScrollPane2.setViewportView(lst_allrestaurants);
 
         lbl_resultsFound.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_resultsFound.setText("Searching Range/Distance (miles):");
+        lbl_resultsFound.setText("");
 
         javax.swing.GroupLayout pnl_searchLayout = new javax.swing.GroupLayout(pnl_search);
         pnl_search.setLayout(pnl_searchLayout);
@@ -316,11 +316,7 @@ public class MainGraphics extends javax.swing.JFrame {
 
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        lst_sortedrestaurants.setFont(new  Font("Tahoma", 0, 18)); // NOI18N
-        
-        Vector<Restaurants> Kres = getkRes();
-   	 
-        
+        lst_sortedrestaurants.setFont(new  Font("Tahoma", 1, 14)); // NOI18N
         
         
         jScrollPane1.setViewportView(lst_sortedrestaurants);
@@ -388,7 +384,7 @@ public class MainGraphics extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(lbl_sortby)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbo_sortby, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbo_sortby, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_resultsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)

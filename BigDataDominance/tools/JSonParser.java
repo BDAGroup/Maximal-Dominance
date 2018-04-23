@@ -273,7 +273,7 @@ public class JSonParser {
 	        	   
 	           }
 	        
-	           Vector<Restaurants> KRestaurants = Skymain.Skyline(Skymain.SortRestaurant(), type);
+	           Vector<Restaurants> KRestaurants = Skymain.Skyline(Skymain.SortRestaurant(type), type);
 	           
 	           setTRes(Skymain.getTotalRestaurant());
 	           setKres(Skymain.getSortres());

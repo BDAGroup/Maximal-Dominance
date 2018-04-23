@@ -48,6 +48,23 @@ public class SkylineMain
                     RestaurantList.set(j , temp);
  
                 }
+                else if ((RestaurantList.get(i).getDistance() == RestaurantList.get(j).getDistance())
+                        && (RestaurantList.get(i).getPrice() > RestaurantList.get(j).getPrice()))
+                {
+                    temp = RestaurantList.get(i);
+                    RestaurantList.set(i , RestaurantList.get(j));
+                    RestaurantList.set(j , temp);
+
+                }
+                else if ((RestaurantList.get(i).getDistance() == RestaurantList.get(j).getDistance())
+                        && (RestaurantList.get(i).getPrice() == RestaurantList.get(j).getPrice())
+                        && (RestaurantList.get(i).getScore() > RestaurantList.get(j).getScore()))
+                {
+                    temp = RestaurantList.get(i);
+                    RestaurantList.set(i , RestaurantList.get(j));
+                    RestaurantList.set(j , temp);
+
+                }
             }
   
         }
@@ -64,20 +81,40 @@ public class SkylineMain
             for (int j = i + 1; j < RestaurantList.size(); j++)
             {
 
-            	if(type == 2) {  if (RestaurantList.get(i).getDistance() > RestaurantList.get(j).getDistance())
-                {
-                	temp = RestaurantList.get(i);
-                    RestaurantList.set(i , RestaurantList.get(j));
-                    RestaurantList.set(j , temp);
+            	if(type == 2)
+            	{
+            	    if (RestaurantList.get(i).getDistance() > RestaurantList.get(j).getDistance())
+                    {
+                	    temp = RestaurantList.get(i);
+                        RestaurantList.set(i , RestaurantList.get(j));
+                        RestaurantList.set(j , temp);
  
-                }}
+                    }
+                    else if ((RestaurantList.get(i).getDistance() == RestaurantList.get(j).getDistance())
+                            && (RestaurantList.get(i).getPrice() > RestaurantList.get(j).getPrice()))
+                    {
+                        temp = RestaurantList.get(i);
+                        RestaurantList.set(i , RestaurantList.get(j));
+                        RestaurantList.set(j , temp);
+
+                    }
+            	}
             	else if(type == 3) {  if (RestaurantList.get(i).getDistance() > RestaurantList.get(j).getDistance())
                 {
                 	temp = RestaurantList.get(i);
                     RestaurantList.set(i , RestaurantList.get(j));
                     RestaurantList.set(j , temp);
  
-                }}
+                }
+                else if ((RestaurantList.get(i).getDistance() == RestaurantList.get(j).getDistance())
+                        && (RestaurantList.get(i).getScore() > RestaurantList.get(j).getScore()))
+                {
+                    temp = RestaurantList.get(i);
+                    RestaurantList.set(i , RestaurantList.get(j));
+                    RestaurantList.set(j , temp);
+
+                }
+            	}
             	
             	else if(type == 4) {  if (RestaurantList.get(i).getPrice() > RestaurantList.get(j).getPrice())
                 {
@@ -85,7 +122,17 @@ public class SkylineMain
                     RestaurantList.set(i , RestaurantList.get(j));
                     RestaurantList.set(j , temp);
  
-                }}
+                }
+                else if ((RestaurantList.get(i).getPrice() == RestaurantList.get(j).getPrice())
+                        && (RestaurantList.get(i).getScore() > RestaurantList.get(j).getScore()))
+                {
+                    temp = RestaurantList.get(i);
+                    RestaurantList.set(i , RestaurantList.get(j));
+                    RestaurantList.set(j , temp);
+
+                }
+                    System.out.println("I came here at price-score.");
+            	}
             }
   
         }
@@ -106,7 +153,7 @@ public class SkylineMain
             for (j = i + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
             {
             	 
-            		if (( RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance()) 
+            		if (( RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance())
                     		&& (RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice()))
                     {
                         RestaurantList.get(j).setCheck(false);                   
@@ -145,28 +192,31 @@ public class SkylineMain
 
        while (i < RestaurantList.size())
         {
-            for (j = i + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
-            {
-            	if(type == 2) {
-            		if (( RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance()) 
-                    		&& (RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice()))
-                    {
-                        RestaurantList.get(j).setCheck(false);                   
-                    }
-            	}
-            	else if(type == 3) {
-            		if (( RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance()) 
-                    		&& (RestaurantList.get(j).getScore() >= RestaurantList.get(i).getScore()))
-                    {
-                        RestaurantList.get(j).setCheck(false);                   
-                    }
-            	}
-            	
-            	else if(type == 4) {
-            		if (( RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice()) 
-                    		&& (RestaurantList.get(j).getScore() >= RestaurantList.get(i).getScore()))
-                    {
-                        RestaurantList.get(j).setCheck(false);                   
+            if(RestaurantList.get(i).isCheck()) {
+                for (j = i + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
+                {
+
+                    if (type == 1) {
+                        if ((RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance())
+                                && (RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice())
+                                && (RestaurantList.get(j).getScore() >= RestaurantList.get(i).getScore())) {
+                            RestaurantList.get(j).setCheck(false);
+                        }
+                    } else if (type == 2) {
+                        if ((RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance())
+                                && (RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice())) {
+                            RestaurantList.get(j).setCheck(false);
+                        }
+                    } else if (type == 3) {
+                        if ((RestaurantList.get(j).getDistance() >= RestaurantList.get(i).getDistance())
+                                && (RestaurantList.get(j).getScore() >= RestaurantList.get(i).getScore())) {
+                            RestaurantList.get(j).setCheck(false);
+                        }
+                    } else if (type == 4) {
+                        if ((RestaurantList.get(j).getPrice() >= RestaurantList.get(i).getPrice())
+                                && (RestaurantList.get(j).getScore() >= RestaurantList.get(i).getScore())) {
+                            RestaurantList.get(j).setCheck(false);
+                        }
                     }
             	}
             }
@@ -181,8 +231,14 @@ public class SkylineMain
             }
         } 
          
-       SetTotalRestaurant(RestaurantList);
-       setSortres(sortres);
+        SetTotalRestaurant(RestaurantList);
+        setSortres(sortres);
+        System.out.println("\nType = " + type);
+        for(i = 0; i < RestaurantList.size(); i++)
+        {
+            System.out.println(RestaurantList.get(i).getName() + " | " + RestaurantList.get(i).getPrice() + " | "
+                    + RestaurantList.get(i).getScore() );
+        }
  
        //RestaurantList.removeAllElements();
        return sortres;

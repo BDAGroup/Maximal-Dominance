@@ -16,7 +16,7 @@ public class Restaurants {
         this.distance = distance;
         this.lat    = lat;
         this.lng    = lng;
-        this.score  = score;
+        this.score  = 5.0 - score;
         this.price  = price;
         this.check  = check;
         
