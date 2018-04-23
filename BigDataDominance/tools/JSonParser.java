@@ -36,8 +36,11 @@ public class JSonParser {
     public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
 	public static Vector<Double> restuarantScore =  new Vector<Double>();
 	public static SkylineMain Skymain ;
-	private static Vector<Restaurants> TRes;
-	private static Vector<Restaurants> Kres;
+	private static Vector<Restaurants> TRes=null;
+	private static Vector<Restaurants> Kres=null;
+	
+	//next_page_token 
+	//https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=CpQCAgEAAFxg8o-eU7_uKn7Yqjana-HQIx1hr5BrT4zBaEko29ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk-ReY7oulyuvKSQrw1lgJElggGlo0d6indiH1U-tDwquw4tU_UXoQ_sj8OBo8XBUuWjuuFShqmLMP-0W59Vr6CaXdLrF8M3wFR4dUUhSf5UC4QCLaOMVP92lyh0OdtF_m_9Dt7lz-Wniod9zDrHeDsz_by570K3jL1VuDKTl_U1cJ0mzz_zDHGfOUf7VU1kVIs1WnM9SGvnm8YZURLTtMLMWx8-doGUE56Af_VfKjGDYW361OOIj9GmkyCFtaoCmTMIr5kgyeUSnB-IEhDlzujVrV6O9Mt7N4DagR6RGhT3g1viYLS4kO5YindU6dm3GIof1Q&key=YOUR_API_KEY
 
 	/**
 	 * @return the restuarantPrice
@@ -114,44 +117,7 @@ public class JSonParser {
 		JSonParser.resVec = resVec;
 	}
  
-	
-/*	public static String NearByRestaurants(double lat , double longtitude , String cuisine , String key )
-	{
  
-        try {     
-       
-        	String url  = "https://maps.googleapis.com/maps/api/place/nearbysearch/"
-        			+ "json?location="+lat+","+longtitude+"&"+
-        			"rankby=distance&types=restaurant&"
-        			+"keyword="+cuisine+""
-        					+ "&key="+key+"";
-
-            URL oracle = new URL(url);
-            URLConnection yc = oracle.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
-            
-            String inputLine;
-            
-            StringBuilder stringBuilder = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) { 
-            	   stringBuilder.append(inputLine);
- 
-           }
-     
-            in.close();
-            
-            String ret = stringBuilder.toString();
-            return ret;
- 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }  
-        
-        return null;
-	}*/
 	public static Vector<Restaurants> getData (String JsonResponse )
 	{
 		try{
@@ -330,16 +296,14 @@ public class JSonParser {
 
            try {           
                HttpClient client = new DefaultHttpClient(); 
-               
-               
+ 
                String url  = "https://maps.googleapis.com/maps/api/place/nearbysearch/"
-        			+ "json?location="+lat+","+longtitude+"&radius="+radius*1609.34+"&&types=restaurant&"
-        			+"keyword="+cuisine+""
+            		   		+ "json?location="+lat+","+longtitude+"&radius="+radius*1609.34+"&&types=restaurant&"
+            		   		+"keyword="+cuisine+""
         					+ "&key="+key+"";
-               
-              // System.out.println("Url " + url);
-               
+ 
                HttpPost post = new HttpPost(url);
+              
                HttpResponse response = client.execute(post);
                HttpEntity entity = response.getEntity();
                inputStream = entity.getContent();
@@ -355,13 +319,14 @@ public class JSonParser {
                    sbuild.append(line);
                }
                inputStream.close();
-               json = sbuild.toString();               
+               json = sbuild.toString();    
+               
+              
            } catch(Exception e) {
            }
           
            return json;
- 
-          
+     
        }
 
 

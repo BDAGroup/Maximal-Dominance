@@ -24,14 +24,12 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import searchQuery.Restaurants;
 
-/**
- * This program demonstrates how to draw XY line chart with XYDataset
- * using JFreechart library.
- * @author www.codejava.net
- *
- */
 public class XYLineChartExample extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Vector<Restaurants> ResV;
 
 	public XYLineChartExample(String XAxis , String YAxis , Vector<Restaurants> Res , Vector<Restaurants> KRes , int type) {

@@ -13,6 +13,7 @@ import tools.Tools;
 import tools.XYLineChartExample;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import java.util.Vector;
 
 import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -32,6 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -52,26 +55,26 @@ public class MainGraphics extends javax.swing.JFrame {
      */
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_showAnalysis;
-    private javax.swing.JComboBox<String> cbo_cuisine;
-    private javax.swing.JComboBox<String> cbo_sortby;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lbl_cuisine;
-    private javax.swing.JLabel lbl_cuisine1;
-    private javax.swing.JLabel lbl_header;
-    private javax.swing.JLabel lbl_resultsFound;
-    private javax.swing.JLabel lbl_search;
-    private javax.swing.JLabel lbl_sortby;
-    private javax.swing.JList<String> lst_allrestaurants;
-    private javax.swing.JList<String> lst_sortedrestaurants;
-    public javax.swing.JPanel pnl_header;
+    private  JButton btn_search;
+    private JButton btn_showAnalysis;
+    private  JComboBox<String> cbo_cuisine;
+    private  JComboBox<String> cbo_sortby;
+    private  JScrollPane jScrollPane1;
+    private  JScrollPane jScrollPane2;
+    private  JSeparator jSeparator1;
+    private  JLabel lbl_cuisine;
+    private  JLabel lbl_cuisine1;
+    private  JLabel lbl_header;
+    private  JLabel lbl_resultsFound;
+    private  JLabel lbl_search;
+    private  JLabel lbl_sortby;
+    private  JList<String> lst_allrestaurants;
+    private  JList<String> lst_sortedrestaurants;
+    public   JPanel pnl_header;
     private static javax.swing.JPanel pnl_map;
-    private javax.swing.JPanel pnl_results;
-    private javax.swing.JPanel pnl_search;
-    private javax.swing.JTextField txt_searchrange;
+    private  JPanel pnl_results;
+    private  JPanel pnl_search;
+    private  JTextField txt_searchrange;
     // End of variables declaration//GEN-END:variables
    
     private static GeocoderExample mapView = new GeocoderExample();
@@ -79,6 +82,7 @@ public class MainGraphics extends javax.swing.JFrame {
     public static Vector<Double[]> restuarantlatlng =  new Vector<Double[]>();
     public static Vector<Integer> restuarantPrice =  new Vector<Integer>();
 	public static Vector<Double> restuarantScore =  new Vector<Double>();
+	private static final String title = "Restaurants Recommendation System";
 	
 	public static Vector<Restaurants> kRes;
 	
@@ -108,9 +112,9 @@ public class MainGraphics extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_header = new javax.swing.JPanel();
-        lbl_header = new javax.swing.JLabel();
-        pnl_search = new javax.swing.JPanel();
+        pnl_header = new  JPanel();
+        lbl_header = new  JLabel();
+        pnl_search = new  JPanel();
         lbl_search = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lbl_cuisine = new javax.swing.JLabel();
@@ -149,7 +153,7 @@ public class MainGraphics extends javax.swing.JFrame {
         lbl_header.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         lbl_header.setForeground(new java.awt.Color(0, 102, 204));
         lbl_header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_header.setText("Restaurants Recommendation System");
+        //lbl_header.setText(title);
 
         javax.swing.GroupLayout pnl_headerLayout = new javax.swing.GroupLayout(pnl_header);
         pnl_header.setLayout(pnl_headerLayout);
@@ -312,38 +316,49 @@ public class MainGraphics extends javax.swing.JFrame {
 
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        lst_sortedrestaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        
-        
+        lst_sortedrestaurants.setFont(new  Font("Tahoma", 0, 18)); // NOI18N
+    
+		Vector<Restaurants> Kres = getkRes();
         lst_sortedrestaurants.setModel(new AbstractListModel<String>() 
         { 
-     	   Vector<String> vec  = JSonParser.getResVec();
-           Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
-           Vector<Integer> price =   JSonParser.getRestuarantPrice();
-           Vector<Double> Score =   JSonParser.getRestuarantScore();
-		private static final long serialVersionUID = 4267073180687045665L;
-	 
-        public int getSize() { 
-        	 
-        	if (vec.size() > 0)
-          return vec.size();
-        	
-        	else return 40;
+            
+			private static final long serialVersionUID = 1957933967234505236L;
+ 
+			public int getSize() { 
+         
+				try{
+        	 System.out.println(Kres.size());
+        	 if (Kres.size() > 0)
+        		 return Kres.size();
+				}
+				catch(NullPointerException e)
+				{
+					  return 40;
+				}
+				  return 40;
         }
         
         public String getElementAt(int i)
         { 
-           
-     		if (vec.size() > 0)
-        		{
-     				String info  = vec.get(i).toString() + 
+
+			try{
+        		 
+             	 if (Kres.size() > 0)
+             	 {
+             		String info  = Kres.get(i).getName() + 
      						" [" + Tools.distance(41.1536674 , -81.3578859 , 
-     								lltVec.get(i)[0], lltVec.get(i)[1]) 
-     							+ " mi ] [ Score " +Score.get(i)+"| Price :" + Tools.GetChar(price.get(i))+"]";
+     								Kres.get(i).getLat(),Kres.get(i).getLng()) 
+     							+ " mi ] [ Score " +Kres.get(i).getScore()+"| Price :" +  Kres.get(i).getPrice()+"]";
      	 
         			return info;
-        		}
-
+             	 }
+			}
+			catch(NullPointerException e)
+			{
+				  return "a";
+			}
+              
+ 
         	return " ";
         	 
 
@@ -604,14 +619,33 @@ public class MainGraphics extends javax.swing.JFrame {
 				 {
 					 Vector<Restaurants> kRes = JSonParser.getData(str, index);
 					 
-				
+					 setkRes(kRes);
 				 }
 				 
 				 else {
 					 Vector<Restaurants> kRes = JSonParser.getData(str);
+					 setkRes(kRes);
 				 }
- 
-				 setkRes(kRes);
+				 
+				 System.out.println("size" + kRes.size());
+				 
+				 
+			/*	 DefaultListModel<String> dlm = new DefaultListModel<String>();
+				 
+				 lst_allrestaurants = new JList<>(dlm);
+
+				 for (int i = 0; i < kRes.size(); i++) {
+					 
+					 String info  = kRes.get(i).getName() + 
+	     						" [" + Tools.distance(41.1536674 , -81.3578859 , 
+	     								kRes.get(i).getLat(),kRes.get(i).getLng()) 
+	     							+ " mi ] [ Score " +kRes.get(i).getScore()+"| Price :" +  kRes.get(i).getPrice()+"]";
+				      	
+					 dlm.add(i, info);
+
+				    }
+				 */
+			
 				 
 				 Vector<Restaurants> TRes = JSonParser.getTRes();
 			 
