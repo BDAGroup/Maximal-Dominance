@@ -317,53 +317,9 @@ public class MainGraphics extends javax.swing.JFrame {
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         lst_sortedrestaurants.setFont(new  Font("Tahoma", 0, 18)); // NOI18N
-    
-		Vector<Restaurants> Kres = getkRes();
-        lst_sortedrestaurants.setModel(new AbstractListModel<String>() 
-        { 
-            
-			private static final long serialVersionUID = 1957933967234505236L;
- 
-			public int getSize() { 
-         
-				try{
-        	 System.out.println(Kres.size());
-        	 if (Kres.size() > 0)
-        		 return Kres.size();
-				}
-				catch(NullPointerException e)
-				{
-					  return 40;
-				}
-				  return 40;
-        }
         
-        public String getElementAt(int i)
-        { 
-
-			try{
-        		 
-             	 if (Kres.size() > 0)
-             	 {
-             		String info  = Kres.get(i).getName() + 
-     						" [" + Tools.distance(41.1536674 , -81.3578859 , 
-     								Kres.get(i).getLat(),Kres.get(i).getLng()) 
-     							+ " mi ] [ Score " +Kres.get(i).getScore()+"| Price :" +  Kres.get(i).getPrice()+"]";
-     	 
-        			return info;
-             	 }
-			}
-			catch(NullPointerException e)
-			{
-				  return "a";
-			}
-              
- 
-        	return " ";
-        	 
-
-        }
-    });
+        Vector<Restaurants> Kres = getkRes();
+   	 
         
         
         
@@ -411,8 +367,8 @@ public class MainGraphics extends javax.swing.JFrame {
                 	break;
                 	
                 }
-              
-                
+               
+                 SearchAction();
                  XYLineChartExample.DrawChart("Score", "Distance", JSonParser.getTRes(),  JSonParser.getKres() , i);
                 
       
@@ -503,10 +459,7 @@ public class MainGraphics extends javax.swing.JFrame {
 
     private void btn_showAnalysisActionPerformed(java.awt.event.ActionEvent evt) { 
     	
-    	
-    	
-    	
-       
+ 
     } 
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
@@ -530,10 +483,11 @@ public class MainGraphics extends javax.swing.JFrame {
 
     public static MainGraphics mainFrame;
     public static void main(String args[]) {
-    	
+    	 
     	   setStr(args);
- 
   	       PatternTheme pat =  new PatternTheme();
+  	       
+  	      
     	try {
     		UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel"); 	
     		 	pat.setUpColor();	
@@ -601,7 +555,6 @@ public class MainGraphics extends javax.swing.JFrame {
     	String cuisine = cbo_cuisine.getSelectedItem().toString();
     	
     	double radius =  Double.parseDouble(txt_searchrange.getText().toString().trim());
-    	
     	restuarantName.removeAllElements();
     	restuarantlatlng.removeAllElements();
     	restuarantScore.removeAllElements();
@@ -611,14 +564,11 @@ public class MainGraphics extends javax.swing.JFrame {
     	{
 			try {
 				 String str  = JSonParser.RestaurantsWithInRadius(41.1536674 , -81.3578859 , cuisine , JSonParser.KEy , radius);
-				 
-				 
-				 int index  =  cbo_sortby.getSelectedIndex();
-				 
+
+				 int index  =  cbo_sortby.getSelectedIndex();			 
 				 if (index != 0)
 				 {
 					 Vector<Restaurants> kRes = JSonParser.getData(str, index);
-					 
 					 setkRes(kRes);
 				 }
 				 
@@ -629,39 +579,17 @@ public class MainGraphics extends javax.swing.JFrame {
 				 
 				 System.out.println("size" + kRes.size());
 				 
+				 UpdateList();
 				 
-			/*	 DefaultListModel<String> dlm = new DefaultListModel<String>();
-				 
-				 lst_allrestaurants = new JList<>(dlm);
-
-				 for (int i = 0; i < kRes.size(); i++) {
-					 
-					 String info  = kRes.get(i).getName() + 
-	     						" [" + Tools.distance(41.1536674 , -81.3578859 , 
-	     								kRes.get(i).getLat(),kRes.get(i).getLng()) 
-	     							+ " mi ] [ Score " +kRes.get(i).getScore()+"| Price :" +  kRes.get(i).getPrice()+"]";
-				      	
-					 dlm.add(i, info);
-
-				    }
-				 */
 			
-				 
 				 Vector<Restaurants> TRes = JSonParser.getTRes();
-			 
-				 
 				 restuarantName   = JSonParser.getResVec();
-				 
 				 restuarantlatlng =  JSonParser.getRestuarantlatlng();
-				 
 				 restuarantPrice  = JSonParser.getRestuarantPrice();
-				 
 				 restuarantScore  = JSonParser.getRestuarantScore();
- 
 				 for (int i = 0 ; i < restuarantName.size() ; i++ )
 	                {
-					 	 Double[] latlng = restuarantlatlng.get(i);
-					    
+					 	 Double[] latlng = restuarantlatlng.get(i);					    
 					 	 mapView.performGeocode( restuarantName.get(i).toString() , latlng[0] , latlng[1]  , restuarantPrice.get(i) , restuarantScore.get(i));
 	                }
 				 
@@ -673,9 +601,6 @@ public class MainGraphics extends javax.swing.JFrame {
 			}
 				
     	}
-    	
-    
- 
     }
 
 	/**
@@ -690,6 +615,49 @@ public class MainGraphics extends javax.swing.JFrame {
 	 */
 	public static void setkRes(Vector<Restaurants> kRes) {
 		MainGraphics.kRes = kRes;
+	}
+	
+	public void UpdateList()
+	{
+
+        lst_sortedrestaurants.setModel(new AbstractListModel<String>() 
+        { 
+			private static final long serialVersionUID = 1957933967234505236L;
+			
+			Vector<Restaurants> kres =  getkRes();
+			public int getSize() { 
+				try{
+      
+        	 if (kres.size() > 0)
+        		 return kres.size();
+				}
+				catch(NullPointerException e)
+				{
+					  return 40;
+				}
+				  return 40;
+			}
+        
+        public String getElementAt(int i)
+        { 
+			try{
+             	 if (getkRes().size() > 0)
+             	 {
+             		  // System.out.println(kres.get(i).getName());
+             		String info  = kres.get(i).getName() + 
+     						" [" + Tools.distance(41.1536674 , -81.3578859 , 
+     								kres.get(i).getLat(),getkRes().get(i).getLng()) 
+     							+ " mi ] [ Score " +kres.get(i).getScore()+"| Price :" +  kres.get(i).getPrice()+"]";
+        			return info;
+             	 }
+			}
+			catch(NullPointerException e)
+			{
+				  
+			}
+        	return " ";
+        }
+    });
 	}
  
 

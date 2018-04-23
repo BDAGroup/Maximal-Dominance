@@ -145,6 +145,8 @@ public class JSonParser {
 	                Boolean open = (Boolean)opening_hours.get("open_now");
 	                int price_level = (int)jsonObject2.get("price_level");
 	                double rating = (double)jsonObject2.get("rating");
+	                
+
 	                Vector<Object> data = new Vector<Object>();
 	                data.add(name);
 	                Double[] geo  =  new Double[2];
@@ -168,13 +170,10 @@ public class JSonParser {
 	                setRestuarantlatlng(restuarantlatlng);
 	                setRestuarantPrice(restuarantPrice);
 	                setRestuarantScore(restuarantScore);
- 
-
-					   double dis =  tools.Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
-					   Restaurants re = new Restaurants(dis , latitude ,longitude ,  rating , price_level , true );
- 
-					   Skymain.Init(re);
- 
+	                
+					double dis =  tools.Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
+					Restaurants re = new Restaurants(dis , latitude ,longitude ,  rating , price_level , true );
+					Skymain.Init(re);
  
 	        	   }
 
@@ -224,6 +223,7 @@ public class JSonParser {
 	                
 	                String name = (String)jsonObject2.get("name").toString();
 	                
+	                System.out.println("Name " + name);
 	                String place_id = (String)jsonObject2.get("place_id").toString();
 	                
 	                JSONObject opening_hours = (JSONObject)jsonObject2.get("opening_hours");
@@ -231,6 +231,11 @@ public class JSonParser {
 	                Boolean open = (Boolean)opening_hours.get("open_now");
 	                int price_level = (int)jsonObject2.get("price_level");
 	                double rating = (double)jsonObject2.get("rating");
+	                
+	                double dis =  tools.Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
+	             
+					Restaurants re = new Restaurants(name , dis , latitude ,longitude ,  rating , price_level , true );
+	   
 	                Vector<Object> data = new Vector<Object>();
 	                data.add(name);
 	                Double[] geo  =  new Double[2];
@@ -240,13 +245,13 @@ public class JSonParser {
 	                data.add(open);
 	                data.add(price_level);
 	                data.add(rating);
-	                
+	               
 	                resVec.addElement(name);
 	                
 	                resPID.addElement(place_id);
 	                
 	                retreiveData.put(i, data);
-	                
+	         	   
 	                restuarantlatlng.addElement(geo);
 	                restuarantPrice.addElement(price_level);
 	                restuarantScore.addElement(rating);
@@ -254,11 +259,8 @@ public class JSonParser {
 	                setRestuarantlatlng(restuarantlatlng);
 	                setRestuarantPrice(restuarantPrice);
 	                setRestuarantScore(restuarantScore);
- 
-
-					   double dis =  tools.Tools.distance(41.1536674 , -81.3578859, latitude, longitude);
-					   Restaurants re = new Restaurants(dis , latitude ,longitude ,  rating , price_level , true );
-					   re.setName(name);
+  
+					  
 					   Skymain.Init(re);
  
  

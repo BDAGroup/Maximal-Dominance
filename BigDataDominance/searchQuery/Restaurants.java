@@ -22,6 +22,18 @@ public class Restaurants {
         
     }
     
+    public Restaurants(String name , double distance , double lat ,  double lng , double score ,  double price  , boolean check)
+    {
+    	this.Name 	= name;
+        this.distance = distance;
+        this.lat    = lat;
+        this.lng    = lng;
+        this.score  = score;
+        this.price  = price;
+        this.check  = check;
+        
+    }
+    
     public void setName(String name)
     {
     	this.Name = name;
