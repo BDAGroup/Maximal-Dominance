@@ -27,7 +27,12 @@
 	<classpathentry kind="lib" path="X:/Libraries/orsoncharts-1.5/lib/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="X:/Libraries/orsoncharts-1.5/lib/jfreesvg-3.0.jar"/>
 	<classpathentry kind="lib" path="X:/Libraries/orsoncharts-1.5/lib/junit-4.11.jar"/>
-	<classpathentry kind="lib" path="X:/Libraries/orsoncharts-1.5/lib/orsoncharts-1.5.jar"/>
-	<classpathentry kind="lib" path="X:/Libraries/orsoncharts-1.5/lib/orsonpdf-1.7.jar"/>
+	<classpathentry kind="lib" path="Jars/fxgraphics2d-1.3.jar"/>
+	<classpathentry kind="lib" path="Jars/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="Jars/javafx-ui-common.jar"/>
+	<classpathentry kind="lib" path="Jars/jfreesvg-3.0.jar"/>
+	<classpathentry kind="lib" path="Jars/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="Jars/orsoncharts-1.5.jar"/>
+	<classpathentry kind="lib" path="Jars/orsonpdf-1.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
