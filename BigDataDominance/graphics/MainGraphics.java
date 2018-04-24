@@ -155,7 +155,7 @@ public class MainGraphics extends javax.swing.JFrame {
         lbl_header.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         lbl_header.setForeground(new java.awt.Color(0, 102, 204));
         lbl_header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_header.setText("Restaurants Recommendation System");
+        lbl_header.setText("A Restaurant Recommendation System");
 
         javax.swing.GroupLayout pnl_headerLayout = new javax.swing.GroupLayout(pnl_header);
         pnl_header.setLayout(pnl_headerLayout);
@@ -255,7 +255,7 @@ public class MainGraphics extends javax.swing.JFrame {
         
         
 
-        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jScrollPane2.setViewportView(lst_allrestaurants);
 
         lbl_resultsFound.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -266,33 +266,35 @@ public class MainGraphics extends javax.swing.JFrame {
         pnl_searchLayout.setHorizontalGroup(
             pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_searchLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_search)
-                .addGap(234, 234, 234))
             .addGroup(pnl_searchLayout.createSequentialGroup()
                 .addGroup(pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_searchLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addGroup(pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnl_searchLayout.createSequentialGroup()
                                 .addComponent(lbl_cuisine)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbo_cuisine, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(cbo_cuisine, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnl_searchLayout.createSequentialGroup()
                                 .addComponent(lbl_cuisine1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_searchrange, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_search, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_searchrange, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 97, Short.MAX_VALUE))
                     .addGroup(pnl_searchLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2)))
+                        .addComponent(jScrollPane2))
+                    .addGroup(pnl_searchLayout.createSequentialGroup()
+                        .addGroup(pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_searchLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbl_resultsFound))
+                            .addGroup(pnl_searchLayout.createSequentialGroup()
+                                .addGap(279, 279, 279)
+                                .addComponent(lbl_search)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(pnl_searchLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_resultsFound)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_searchLayout.setVerticalGroup(
             pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,20 +307,19 @@ public class MainGraphics extends javax.swing.JFrame {
                     .addComponent(lbl_cuisine)
                     .addComponent(cbo_cuisine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_cuisine1)
-                    .addGroup(pnl_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_searchrange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_searchrange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(lbl_resultsFound)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
         );
 
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        lst_sortedrestaurants.setFont(new  Font("Tahoma", 1, 14)); // NOI18N
+        lst_sortedrestaurants.setFont(new  Font("Tahoma", 1, 15)); // NOI18N
         
         
         jScrollPane1.setViewportView(lst_sortedrestaurants);
@@ -376,6 +377,15 @@ public class MainGraphics extends javax.swing.JFrame {
                 
             }
         });
+		btn_go_sort.setBackground(new java.awt.Color(0, 102, 204));
+        btn_go_sort.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_go_sort.setForeground(new java.awt.Color(255, 255, 255));
+        btn_go_sort.setText("GO");
+        btn_go_sort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_go_sortActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_resultsLayout = new javax.swing.GroupLayout(pnl_results);
         pnl_results.setLayout(pnl_resultsLayout);
@@ -387,15 +397,16 @@ public class MainGraphics extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(pnl_resultsLayout.createSequentialGroup()
                         .addComponent(lbl_sortby)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbo_sortby, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_go_sort, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_resultsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_showAnalysis)
-                        .addGap(143, 143, 143)))
+                        .addComponent(cbo_sortby, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_go_sort, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_resultsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_showAnalysis)
+                .addGap(237, 237, 237))
         );
         pnl_resultsLayout.setVerticalGroup(
             pnl_resultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,7 +497,12 @@ public class MainGraphics extends javax.swing.JFrame {
 
     private void btn_go_sortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_go_sortActionPerformed
         // TODO add your handling code here:
-        //DO SOME WORK HERE
+        if(cbo_sortby.getSelectedIndex() > 0){
+            UpdateList();
+        }
+        else{
+            //clear list
+        }
     }//GEN-LAST:event_btn_go_sortActionPerformed
 
     public static MainGraphics mainFrame;
@@ -585,7 +601,9 @@ public class MainGraphics extends javax.swing.JFrame {
 					 setkRes(kRes);
 				 }
  
- 
+				 
+				 System.out.println("size" + kRes.size());
+	 
 				 Vector<Restaurants> TRes = JSonParser.getTRes();
 				 restuarantName   = JSonParser.getResVec();
 				 restuarantlatlng =  JSonParser.getRestuarantlatlng();
@@ -648,10 +666,10 @@ public class MainGraphics extends javax.swing.JFrame {
              	 if (getkRes().size() > 0)
              	 {
              		  // System.out.println(kres.get(i).getName());
-             		String info  = kres.get(i).getName() + 
+             		String info  = (i+1) + ". " + kres.get(i).getName() +
      						" [" + Tools.distance(41.1536674 , -81.3578859 , 
      								kres.get(i).getLat(),getkRes().get(i).getLng()) 
-     							+ " mi ] [ Score " +kres.get(i).getScore()+"| Price :" +  kres.get(i).getPrice()+"]";
+     							+ " mi | Score " +kres.get(i).getScore()+"| Price :" +  kres.get(i).getPrice()+"]";
         			return info;
              	 }
 			}
