@@ -55,27 +55,27 @@ public class MainGraphics extends javax.swing.JFrame {
      */
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_go_sort;
-    private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_showAnalysis;
-    private javax.swing.JComboBox<String> cbo_cuisine;
-    private javax.swing.JComboBox<String> cbo_sortby;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lbl_cuisine;
-    private javax.swing.JLabel lbl_cuisine1;
-    private javax.swing.JLabel lbl_header;
-    private javax.swing.JLabel lbl_resultsFound;
-    private javax.swing.JLabel lbl_search;
-    private javax.swing.JLabel lbl_sortby;
-    private javax.swing.JList<String> lst_allrestaurants;
-    private javax.swing.JList<String> lst_sortedrestaurants;
-    public javax.swing.JPanel pnl_header;
+	private JButton btn_go_sort;
+    private  JButton btn_search;
+    private JButton btn_showAnalysis;
+    private  JComboBox<String> cbo_cuisine;
+    private  JComboBox<String> cbo_sortby;
+    private  JScrollPane jScrollPane1;
+    private  JScrollPane jScrollPane2;
+    private  JSeparator jSeparator1;
+    private  JLabel lbl_cuisine;
+    private  JLabel lbl_cuisine1;
+    private  JLabel lbl_header;
+    private  JLabel lbl_resultsFound;
+    private  JLabel lbl_search;
+    private  JLabel lbl_sortby;
+    private  JList<String> lst_allrestaurants;
+    private  JList<String> lst_sortedrestaurants;
+    public   JPanel pnl_header;
     private static javax.swing.JPanel pnl_map;
-    private javax.swing.JPanel pnl_results;
-    private javax.swing.JPanel pnl_search;
-    private javax.swing.JTextField txt_searchrange;
+    private  JPanel pnl_results;
+    private  JPanel pnl_search;
+    private  JTextField txt_searchrange;
     // End of variables declaration//GEN-END:variables
    
     private static GeocoderExample mapView = new GeocoderExample();
@@ -113,9 +113,9 @@ public class MainGraphics extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_header = new javax.swing.JPanel();
-        lbl_header = new javax.swing.JLabel();
-        pnl_search = new javax.swing.JPanel();
+        pnl_header = new  JPanel();
+        lbl_header = new  JLabel();
+        pnl_search = new  JPanel();
         lbl_search = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lbl_cuisine = new javax.swing.JLabel();
@@ -132,7 +132,7 @@ public class MainGraphics extends javax.swing.JFrame {
         lbl_sortby = new javax.swing.JLabel();
         cbo_sortby = new javax.swing.JComboBox<>();
         btn_showAnalysis = new javax.swing.JButton();
-        btn_go_sort = new javax.swing.JButton();
+        btn_go_sort = new JButton();
         pnl_map = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -193,7 +193,19 @@ public class MainGraphics extends javax.swing.JFrame {
         });
 
         cbo_cuisine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ...", "American", "Italian", "Mexican", "Chinese", "Indian", "Nepalese" }));
+        cbo_cuisine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a cuisine ...", 
+        		"American", 
+        		"Italian", 
+        		"Mexican",
+        		"Japanese", 
+        		"Chinese", 
+        		"Indian", 
+        		"Nepalese", 
+        		"Thai" ,
+        		"Mediterranean",
+        		"Turkish", 
+        		"Greek", 
+        		"Caribbean"}));
 
         btn_search.setBackground(new java.awt.Color(0, 102, 204));
         btn_search.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -204,12 +216,50 @@ public class MainGraphics extends javax.swing.JFrame {
                 btn_searchActionPerformed(evt);
             }
         });
+ 
+        lst_allrestaurants.setModel(new AbstractListModel<String>() 
+        { 
+        	   Vector<String> vec  = JSonParser.getResVec();
+               Vector<Double[]> lltVec =   JSonParser.getRestuarantlatlng();
+               Vector<Integer> price =   JSonParser.getRestuarantPrice();
+               Vector<Double> Score =   JSonParser.getRestuarantScore();
+			private static final long serialVersionUID = 4267073180687045665L;
+		 
+            public int getSize() { 
+            	 
+            	if (vec.size() > 0)
+              return vec.size();
+            	
+            	else return 40;
+            }
+            
+            public String getElementAt(int i)
+            { 
+               
+         		if (vec.size() > 0)
+            		{
+         				String info  = (i+1) + ". "+vec.get(i).toString() +
+         						" \n[" + Tools.distance(41.1536674 , -81.3578859 ,
+         								lltVec.get(i)[0], lltVec.get(i)[1]) 
+         							+ " mi | Score " +Score.get(i)+" | Price :" + Tools.GetChar(price.get(i))+"]";
+         	 
+            			return info;
+            		}
 
-        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+            	return " ";
+            	 
+
+            }
+        });
+        
+        
+        
+
+        lst_allrestaurants.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jScrollPane2.setViewportView(lst_allrestaurants);
 
         lbl_resultsFound.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbl_resultsFound.setText("Searching Range/Distance (miles):");
+        lbl_resultsFound.setText("");
 
         javax.swing.GroupLayout pnl_searchLayout = new javax.swing.GroupLayout(pnl_search);
         pnl_search.setLayout(pnl_searchLayout);
@@ -263,19 +313,25 @@ public class MainGraphics extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_resultsFound)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
         );
 
         pnl_results.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        lst_sortedrestaurants.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lst_sortedrestaurants.setFont(new  Font("Tahoma", 1, 14)); // NOI18N
+        
+        
         jScrollPane1.setViewportView(lst_sortedrestaurants);
 
         lbl_sortby.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_sortby.setText("Sort by");
 
-        cbo_sortby.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
-        cbo_sortby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an option ...", "Top Dominating Distance-Price-Score", "Dominating Disstance-Price", "Dominating Distance-Score", "Dominating Price-Score" }));
+        cbo_sortby.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbo_sortby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an option ..."
+        		, "Top Dominating Distance-Price-Score"
+        		, "Dominating Distance-Price"
+        		, "Dominating Distance-Score"
+        		, "Dominating Price-Score" }));
 
         btn_showAnalysis.setBackground(new java.awt.Color(0, 102, 204));
         btn_showAnalysis.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -284,16 +340,37 @@ public class MainGraphics extends javax.swing.JFrame {
         btn_showAnalysis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_showAnalysisActionPerformed(evt);
-            }
-        });
-
-        btn_go_sort.setBackground(new java.awt.Color(0, 102, 204));
-        btn_go_sort.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btn_go_sort.setForeground(new java.awt.Color(255, 255, 255));
-        btn_go_sort.setText("GO");
-        btn_go_sort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_go_sortActionPerformed(evt);
+                int str  =  cbo_sortby.getSelectedIndex();
+                int i = 0;
+                switch(str)
+                {
+                case 0:
+                	i = 0;
+                break;
+                
+                case 1:
+                	i = 1;
+                break;
+                
+                case 2:
+                	i = 2;
+                	break;
+                	
+                case 3:
+                	i = 3;
+                	break;
+                	
+                case 4:
+                	i = 4;
+                	break;
+                	
+                }
+               
+                 SearchAction();
+                 XYLineChartExample.DrawChart("Score", "Distance", JSonParser.getTRes(),  JSonParser.getKres() , i);
+                
+      
+                
             }
         });
 
