@@ -125,7 +125,7 @@ public class GeocoderExample extends MapView {
             protected void updatePosition() {
                 if (parentFrame.isVisible()) {
                     Point newLocation = parentFrame.getContentPane().getLocationOnScreen();
-                    newLocation.translate(520, 110);
+                    newLocation.translate(690, 110);
                     contentWindow.setLocation(newLocation);
                     contentWindow.setSize(150, 40);
                 }

@@ -494,7 +494,12 @@ public class MainGraphics extends javax.swing.JFrame {
 
     private void btn_go_sortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_go_sortActionPerformed
         // TODO add your handling code here:
-        //DO SOME WORK HERE
+        if(cbo_sortby.getSelectedIndex() > 0){
+            UpdateList();
+        }
+        else{
+            //clear list
+        }
     }//GEN-LAST:event_btn_go_sortActionPerformed
 
     public static MainGraphics mainFrame;
@@ -595,9 +600,7 @@ public class MainGraphics extends javax.swing.JFrame {
 				 
 				 System.out.println("size" + kRes.size());
 				 
-				 UpdateList();
-				 
-			
+
 				 Vector<Restaurants> TRes = JSonParser.getTRes();
 				 restuarantName   = JSonParser.getResVec();
 				 restuarantlatlng =  JSonParser.getRestuarantlatlng();
@@ -660,10 +663,10 @@ public class MainGraphics extends javax.swing.JFrame {
              	 if (getkRes().size() > 0)
              	 {
              		  // System.out.println(kres.get(i).getName());
-             		String info  = kres.get(i).getName() + 
+             		String info  = (i+1) + ". " + kres.get(i).getName() +
      						" [" + Tools.distance(41.1536674 , -81.3578859 , 
      								kres.get(i).getLat(),getkRes().get(i).getLng()) 
-     							+ " mi ] [ Score " +kres.get(i).getScore()+"| Price :" +  kres.get(i).getPrice()+"]";
+     							+ " mi | Score " +kres.get(i).getScore()+"| Price :" +  kres.get(i).getPrice()+"]";
         			return info;
              	 }
 			}

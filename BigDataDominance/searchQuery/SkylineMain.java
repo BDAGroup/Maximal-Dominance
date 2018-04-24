@@ -131,8 +131,7 @@ public class SkylineMain
                     RestaurantList.set(j , temp);
 
                 }
-                    System.out.println("I came here at price-score.");
-            	}
+                }
             }
   
         }
@@ -148,7 +147,7 @@ public class SkylineMain
         
        Vector<Restaurants>  sortres = new Vector<Restaurants>();
 
-       while (i < RestaurantList.size())
+       while (i < RestaurantList.size()-1)
         {
             for (j = i + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
             {
@@ -190,7 +189,7 @@ public class SkylineMain
         
        Vector<Restaurants>  sortres = new Vector<Restaurants>();
 
-       while (i < RestaurantList.size())
+       while (i < RestaurantList.size()-1)
         {
             if(RestaurantList.get(i).isCheck()) {
                 for (j = i + 1; j < RestaurantList.size(); j++)   // this 2D loop is used for (distance,price), (distance,score), and (price, score)
