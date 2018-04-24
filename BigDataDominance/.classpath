@@ -23,5 +23,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="Jars/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="Jars/jfreechart.jar"/>
+	<classpathentry kind="lib" path="X:/Libraries/orsoncharts-1.5/lib/fxgraphics2d-1.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

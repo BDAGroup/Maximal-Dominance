@@ -367,6 +367,9 @@ public class MainGraphics extends javax.swing.JFrame {
                 }
                
                  SearchAction();
+    			 
+				 UpdateList();
+				 
                  XYLineChartExample.DrawChart("Score", "Distance", JSonParser.getTRes(),  JSonParser.getKres() , i);
                 
       
@@ -581,12 +584,8 @@ public class MainGraphics extends javax.swing.JFrame {
 					 Vector<Restaurants> kRes = JSonParser.getData(str);
 					 setkRes(kRes);
 				 }
-				 
-				 System.out.println("size" + kRes.size());
-				 
-				 UpdateList();
-				 
-			
+ 
+ 
 				 Vector<Restaurants> TRes = JSonParser.getTRes();
 				 restuarantName   = JSonParser.getResVec();
 				 restuarantlatlng =  JSonParser.getRestuarantlatlng();
