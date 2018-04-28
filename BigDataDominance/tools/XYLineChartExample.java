@@ -21,6 +21,7 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RefineryUtilities;
 
 import searchQuery.Restaurants;
 
@@ -36,25 +37,19 @@ public class XYLineChartExample extends JFrame {
 		super("XY Line Chart Example with JFreechart");
 		JPanel chartPanel = createChartPanel(XAxis , YAxis , Res , KRes , type);
 		add(chartPanel, BorderLayout.CENTER);
-		setSize(640, 480);
+		setSize(800, 600);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}
 	
 	private JPanel createChartPanel(String XAxis , String YAxis , Vector<Restaurants> Res , Vector<Restaurants> KRes , int type) {
-		String chartTitle = "Top K Restuarants";
+		String chartTitle = "Top K Dominating Restuarants";
 
 		XYDataset dataset = createDataset(Res ,  KRes , type);
 		
 		boolean showLegend = true;
 		boolean createURL = false;
 		boolean createTooltip = true;
-		
-	/*	JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, 
-				, dataset, 
- 				PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);*/
-		//
- 
 		
 		if (type == 2)
 		{
@@ -69,35 +64,19 @@ public class XYLineChartExample extends JFrame {
 		else if (type == 4)
 		{
 			XAxis = "Price";
-			YAxis = "Score";
-			
+			YAxis = "Score";	
 		}
-	 
-		
-		
-		 JFreeChart chart = ChartFactory.createScatterPlot( chartTitle,   XAxis, YAxis, dataset , PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);
+		 JFreeChart chart = ChartFactory.createXYLineChart( chartTitle,   XAxis, YAxis, dataset , PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);
 		 customizeChart(chart);
-		
-		
-	/*	// saves the chart as an image files
-		File imageFile = new File("XYLineChart.png");
-		int width = 640;
-		int height = 480;
-		
-		try {
-			ChartUtilities.saveChartAsPNG(imageFile, chart, width, height);
-		} catch (IOException ex) {
-			System.err.println(ex);
-		}*/
-		
+
 		return new ChartPanel(chart);
 	}
 
 	private XYDataset createDataset(Vector<Restaurants> Res , Vector<Restaurants> KRes , int type) {
-		XYSeriesCollection dataset = new XYSeriesCollection();
+		 XYSeriesCollection dataset = new XYSeriesCollection();
 		
-		XYSeries series1 = new XYSeries("Restaurants");
-		XYSeries series2 = new XYSeries("K-Restaurants");
+		XYSeries series1 = new XYSeries("Total Restaurants");
+		XYSeries series2 = new XYSeries("Dominating Restaurants");
 		
  
 		if (type == 2)
@@ -137,8 +116,7 @@ public class XYLineChartExample extends JFrame {
 			{
 				series1.add( Res.get(i).getPrice()  ,Res.get(i).getScore());
 			}
-			
-			
+		
 			for(int k = 0 ; k < KRes.size() ; k++)
 			{
 				series2.add( KRes.get(k).getPrice()  , KRes.get(k).getScore());
@@ -161,13 +139,20 @@ public class XYLineChartExample extends JFrame {
 		// sets paint color for each series
 		renderer.setSeriesPaint(0, Color.RED);
 		renderer.setSeriesPaint(1, Color.GREEN);
-		renderer.setSeriesPaint(2, Color.YELLOW);
+
 
 		// sets thickness for series (using strokes)
-		 renderer.setSeriesStroke(0, new BasicStroke(4.0f));
-		 renderer.setSeriesStroke(1, new BasicStroke(3.0f));
-		renderer.setSeriesStroke(2, new BasicStroke(2.0f));
+		 renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+		 renderer.setSeriesStroke(1, new BasicStroke(4.0f));
+	
 		
+		 
+		 renderer.setSeriesLinesVisible(0, false);
+		 renderer.setSeriesShapesVisible(1, false);
+		 renderer.setSeriesItemLabelsVisible(1, true);
+		 renderer.setSeriesVisibleInLegend(1, true);	
+		
+		 
 		// sets paint color for plot outlines
 		plot.setOutlinePaint(Color.BLUE);
 		plot.setOutlineStroke(new BasicStroke(2.0f));
@@ -195,6 +180,8 @@ public class XYLineChartExample extends JFrame {
 			public void run() {
  
 				XYLineChartExample sline =  new XYLineChartExample(  XAxis ,   YAxis ,    Res , KRes , type);
+				sline.pack();
+			        RefineryUtilities.centerFrameOnScreen(sline);
 				sline.setVisible(true);
 			}
 		});	

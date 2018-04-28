@@ -1,5 +1,7 @@
 package searchQuery;
 
+import tools.Tools;
+
 public class Restaurants {
 
     private   double distance;
@@ -16,7 +18,7 @@ public class Restaurants {
         this.distance = distance;
         this.lat    = lat;
         this.lng    = lng;
-        this.score  = 5.0 - score;
+        this.score  = Tools.formatValueoTwoPlaces(5 - score);
         this.price  = price;
         this.check  = check;
         
@@ -28,7 +30,7 @@ public class Restaurants {
         this.distance = distance;
         this.lat    = lat;
         this.lng    = lng;
-        this.score  = score;
+        this.score  = Tools.formatValueoTwoPlaces(5 - score);
         this.price  = price;
         this.check  = check;
         

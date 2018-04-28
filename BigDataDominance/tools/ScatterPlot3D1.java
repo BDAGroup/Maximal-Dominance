@@ -90,9 +90,7 @@ public class ScatterPlot3D1 {
           Chart3D chart = createChart(createDataset());
     	  chart.setStyle(ch.getStyle());
 
-          ChartStyle sy = chart.getStyle();
-       
-          
+          ChartStyle sy = chart.getStyle();       
           Chart3DPanel  sd =   new Chart3DPanel(ch) ;
  
           demoPanel.addChartPanel(sd);

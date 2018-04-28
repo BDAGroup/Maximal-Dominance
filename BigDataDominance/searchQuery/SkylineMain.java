@@ -178,10 +178,6 @@ public class SkylineMain
  
     }
     
-    
-    
-    
-
 
    public Vector<Restaurants> Skyline(Vector<Restaurants> RestaurantList, int type)
     {

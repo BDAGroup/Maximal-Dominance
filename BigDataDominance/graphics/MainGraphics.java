@@ -133,6 +133,7 @@ public class MainGraphics extends javax.swing.JFrame {
         cbo_sortby = new javax.swing.JComboBox<>();
         btn_showAnalysis = new javax.swing.JButton();
         btn_go_sort = new JButton();
+        btn_go_sort.setVisible(false);
         pnl_map = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -669,7 +670,7 @@ public class MainGraphics extends javax.swing.JFrame {
              		String info  = (i+1) + ". " + kres.get(i).getName() +
      						" [" + Tools.distance(41.1536674 , -81.3578859 , 
      								kres.get(i).getLat(),getkRes().get(i).getLng()) 
-     							+ " mi | Score " +kres.get(i).getScore()+"| Price :" +  kres.get(i).getPrice()+"]";
+     							+ " mi | Score " + (5 - kres.get(i).getScore())+"| Price :" +  kres.get(i).getPrice()+"]";
         			return info;
              	 }
 			}

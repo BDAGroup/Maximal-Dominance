@@ -303,6 +303,8 @@ public class JSonParser {
             		   		+ "json?location="+lat+","+longtitude+"&radius="+radius*1609.34+"&&types=restaurant&"
             		   		+"keyword="+cuisine+""
         					+ "&key="+key+"";
+
+               System.out.println(url);
  
                HttpPost post = new HttpPost(url);
               
