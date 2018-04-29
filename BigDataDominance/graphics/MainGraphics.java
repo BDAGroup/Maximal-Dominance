@@ -9,6 +9,7 @@ import graphics.GeocoderExample;
 import searchQuery.Restaurants;
 import searchQuery.SkylineMain;
 import tools.JSonParser;
+import tools.Skyline3DChart;
 import tools.Tools;
 import tools.XYLineChartExample;
 
@@ -364,15 +365,25 @@ public class MainGraphics extends javax.swing.JFrame {
                 	
                 case 4:
                 	i = 4;
-                	break;
-                	
+                	break;	
                 }
-               
-                 SearchAction();
-    			 
-				 UpdateList();
-				 
-                 XYLineChartExample.DrawChart("Score", "Distance", JSonParser.getTRes(),  JSonParser.getKres() , i);
+             
+				 if (i == 1)
+				 {    SearchAction();
+				     UpdateList();
+					 Skyline3DChart.CreateChart(JSonParser.getTRes(),  JSonParser.getKres());
+				 }
+				 else if (i != 0 || i!= 1)
+				 {
+					    SearchAction();
+						 UpdateList();
+					   XYLineChartExample.DrawChart("Score", "Distance", JSonParser.getTRes(),  JSonParser.getKres() , i);
+				 }
+				 else {
+					 
+				 }
+             
+                 
                 
       
                 
