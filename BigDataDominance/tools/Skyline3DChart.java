@@ -40,6 +40,9 @@ public class Skyline3DChart {
                 "Top K Restaurants", dataset, "Distance", "Score", "Price"); */
        
         XYZPlot plot = (XYZPlot) chart.getPlot(); 
+        
+        
+        
         plot.setDimensions(new Dimension3D(15.0, 8.0, 8.0)); 
         plot.setLegendLabelGenerator(new StandardXYZLabelGenerator( 
                 StandardXYZLabelGenerator.COUNT_TEMPLATE)); 
@@ -61,10 +64,7 @@ public class Skyline3DChart {
 
     public static XYZDataset createDataset(Vector<Restaurants> Tres , Vector<Restaurants> Kres) { 
         XYZSeries s1 = createRandomSeries("Total Restaurants", Tres); 
-        
         XYZSeries s2 = createRandomSeries("K Restaurants",  Kres); 
-        //XYZSeries s3 = createRandomSeries("S3", 150); 
-        
         XYZSeriesCollection dataset = new XYZSeriesCollection(); 
         dataset.add(s1); 
         dataset.add(s2); 
@@ -89,7 +89,7 @@ public class Skyline3DChart {
    	     
          chart.setTitle("Top K Restaurants(Distance , Score , Price)");
          chart.setAntiAlias(true);
-        
+    
          Chart3DPanel  sd =   new Chart3DPanel(chart) ;
          sd.setPreferredSize(new Dimension(50 , 50));
          sd.setBorder(BorderFactory.createCompoundBorder(

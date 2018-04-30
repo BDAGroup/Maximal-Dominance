@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: jar/JTattoo-1.6.11.jar jar/RXTXcomm.jar jar/postgresql.jar jar/barbecue-1.5-beta1.jar  jar/purejavacomm.jar jar/jna-4.5.0.jar jar/jna-platform-4.5.0.jar jar/log4j-1.2.17.jar jar/log4j-api-2.9.0.jar jar/log4j-core-2.0-rc1.jar jar/mail.jar jar/activation.jar
+Main-Class: graphics.MainGraphics
