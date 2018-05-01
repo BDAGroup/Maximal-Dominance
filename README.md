@@ -5,8 +5,10 @@ Computation of Maximal Dominant set of Restaurants from k-query restaurants.
 # Running Steps:
 1. Save the project in a directory
 2. Go to the containing folder
+
 	a. Double click on the jar file (BigDataDominance.jar) to start the project, or
 	b. Start terminal and navigate to the containing folder and execute the command:
+	
 		./BigDataDominance.jar
 3. Then, you will be prompted to the main GUI.
 4. Select a cuisine from the drop-down list provided in the search section.
